@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(NewApp()
-    // MaterialApp(
-    //   home: Center(
-    //     child: Text('Hello world'),
-    //   ),
-    // ),
-    );
+  // MaterialApp(
+  //   home: Center(
+  //     child: Text('Hello world'),
+  //   ),
+  // ),
+);
 
 class NewApp extends StatelessWidget {
   @override

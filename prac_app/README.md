@@ -1,6 +1,6 @@
-# practice_app
+# prac_app
 
-A Flutter project for practice.
+A Practice Flutter project.
 
 ## Getting Started
 
