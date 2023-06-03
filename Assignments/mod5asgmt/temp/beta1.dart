@@ -17,6 +17,7 @@ class HomeActivity extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Module 5 Assignment"),
+        backgroundColor: Colors.amber,
       ),
       drawer: Drawer(
         child: ListView(
@@ -99,6 +100,9 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Page 1"),
+      ),
       body: Center(
         child: Text(
           "Page 1",
@@ -117,6 +121,9 @@ class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Page 2"),
+      ),
       body: Center(
         child: Text(
           "Page 2",
@@ -135,6 +142,9 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Page 3"),
+      ),
       body: Center(
         child: Text(
           "Page 3",

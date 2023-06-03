@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,12 +12,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeActivity extends StatelessWidget {
+class HomeActivity extends StatefulWidget {
+  @override
+  _HomeActivityState createState() {
+    return _HomeActivityState();
+  }
+}
+
+class _HomeActivityState extends State<HomeActivity> {
+  int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Module 5 Assignment"),
+        backgroundColor: Colors.deepPurpleAccent,
       ),
       drawer: Drawer(
         child: ListView(
@@ -26,70 +36,55 @@ class HomeActivity extends StatelessWidget {
               leading: Icon(Icons.home),
               title: Text("Page 1"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Page1()),
-                );
+                setState(() {
+                  _currentIndex = 0;
+                  Navigator.pop(context);
+                });
               },
             ),
             ListTile(
               leading: Icon(Icons.business_center_outlined),
               title: Text("Page 2"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Page2()),
-                );
+                setState(() {
+                  _currentIndex = 1;
+                  Navigator.pop(context);
+                });
               },
             ),
             ListTile(
               leading: Icon(Icons.people),
               title: Text("Page 3"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Page3()),
-                );
+                setState(() {
+                  _currentIndex = 2;
+                  Navigator.pop(context);
+                });
               },
             ),
           ],
         ),
       ),
-      body: Activity(),
-    );
-  }
-}
-
-class Activity extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Page 1"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.business_center_outlined), label: "Page 2"),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: "Page 3"),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          Page1(),
+          Page2(),
+          Page3(),
         ],
-        onTap: (int index) {
-          if (index == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Page1()),
-            );
-          } else if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Page2()),
-            );
-          } else if (index == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Page3()),
-            );
-          }
-        },
+      ),
+      bottomNavigationBar: GNav(
+        gap: 8,
+        tabs: [
+          GButton(icon: Icons.home, text: "Page 1"),
+          GButton(icon: Icons.business_center_outlined, text: "Page 2"),
+          GButton(icon: Icons.people, text: "Page 3"),
+        ],
+        onTabChange: (int index) {
+        setState(() {
+          _currentIndex = index;
+        });
+        } ,
       ),
     );
   }
@@ -99,9 +94,6 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Page 1"),
-      ),
       body: Center(
         child: Text(
           "Page 1",
@@ -120,9 +112,6 @@ class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Page 2"),
-      ),
       body: Center(
         child: Text(
           "Page 2",
@@ -141,9 +130,6 @@ class Page3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Page 3"),
-      ),
       body: Center(
         child: Text(
           "Page 3",
