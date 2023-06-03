@@ -73,18 +73,25 @@ class _HomeActivityState extends State<HomeActivity> {
           Page3(),
         ],
       ),
-      bottomNavigationBar: GNav(
-        gap: 8,
-        tabs: [
-          GButton(icon: Icons.home, text: "Page 1"),
-          GButton(icon: Icons.business_center_outlined, text: "Page 2"),
-          GButton(icon: Icons.people, text: "Page 3"),
-        ],
-        onTabChange: (int index) {
-        setState(() {
-          _currentIndex = index;
-        });
-        } ,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: GNav(
+          iconSize: 24,
+          padding: EdgeInsets.all(16),
+          activeColor: Colors.purple,
+          tabBackgroundColor: Colors.purple.withOpacity(0.1),
+          gap: 8,
+          tabs: [
+            GButton(icon: Icons.home, text: "Page 1"),
+            GButton(icon: Icons.business_center_outlined, text: "Page 2"),
+            GButton(icon: Icons.people, text: "Page 3"),
+          ],
+          onTabChange: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          } ,
+        ),
       ),
     );
   }
