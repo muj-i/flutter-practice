@@ -39,16 +39,22 @@ class _HomeActivityState extends State<HomeActivity> {
       ),
       drawer: Drawer(
         child: Container(
-          color: const Color.fromARGB(255, 10, 29, 66).withAlpha(200),
+          color: const Color.fromARGB(255, 10, 29, 66).withAlpha(2000),
           child: ListView(
             children: [
-              DrawerHeader(child: Text("Module 5 Assignment", 
-              style: TextStyle(fontSize: 44, color: Colors.white70),
+              DrawerHeader(child: Padding(
+                padding: const EdgeInsets.all(9.0),
+                child: Text("Module 5 Assignment",
+                style: TextStyle(fontSize: 44, color: Colors.white70),
+                ),
               )),
               ListTile(
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                leading: Icon(Icons.home),
+                leading: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(Icons.home),
+                ),
                 title: Text("Page 1"),
                 onTap: () {
                   setState(() {
@@ -60,7 +66,10 @@ class _HomeActivityState extends State<HomeActivity> {
               ListTile(
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                leading: Icon(Icons.business_center_outlined),
+                leading: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(Icons.business_center_outlined),
+                ),
                 title: Text("Page 2"),
                 onTap: () {
                   setState(() {
@@ -70,9 +79,13 @@ class _HomeActivityState extends State<HomeActivity> {
                 },
               ),
               ListTile(
+          
                 iconColor: Colors.white,
                 textColor: Colors.white,
-                leading: Icon(Icons.people),
+                leading: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(Icons.people),
+                ),
                 title: Text("Page 3"),
                 onTap: () {
                   setState(() {
@@ -94,9 +107,9 @@ class _HomeActivityState extends State<HomeActivity> {
         ],
       ),
       bottomNavigationBar: Container(
-        color: const Color.fromARGB(255, 10, 29, 66).withAlpha(200),
+        color: const Color.fromARGB(255, 10, 29, 66).withAlpha(1000),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
           child: GNav(
             backgroundColor: const Color.fromARGB(255, 10, 29, 66).withAlpha(0),
             color: Colors.white,
