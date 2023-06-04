@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -8,7 +9,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeActivity());
+    return MaterialApp(home: HomeActivity(),
+      debugShowCheckedModeBanner: false,);
   }
 }
 
@@ -26,7 +28,7 @@ class _HomeActivityState extends State<HomeActivity> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Module 5 Assignment"),
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: const Color.fromARGB(255, 130, 31, 89).withAlpha(2000),
       ),
       drawer: Drawer(
         child: ListView(
@@ -74,12 +76,13 @@ class _HomeActivityState extends State<HomeActivity> {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: GNav(
           iconSize: 24,
           padding: EdgeInsets.all(16),
-          activeColor: Colors.purple,
-          tabBackgroundColor: Colors.purple.withOpacity(0.1),
+          activeColor: const Color.fromARGB(255, 130, 31, 89),
+          tabBackgroundColor:
+              const Color.fromARGB(255, 130, 31, 89).withOpacity(0.1),
           gap: 8,
           tabs: [
             GButton(icon: Icons.home, text: "Page 1"),
@@ -87,10 +90,10 @@ class _HomeActivityState extends State<HomeActivity> {
             GButton(icon: Icons.people, text: "Page 3"),
           ],
           onTabChange: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          } ,
+            setState(() {
+              _currentIndex = index;
+            });
+          },
         ),
       ),
     );
@@ -104,12 +107,14 @@ class Page1 extends StatelessWidget {
       body: Center(
         child: Text(
           "Page 1",
-          style: TextStyle(fontSize: 28),
+          style: TextStyle(fontSize: 32),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        child: Icon(Icons.abc_rounded),
         onPressed: () {},
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromARGB(255, 130, 31, 89),
       ),
     );
   }
@@ -122,12 +127,14 @@ class Page2 extends StatelessWidget {
       body: Center(
         child: Text(
           "Page 2",
-          style: TextStyle(fontSize: 28),
+          style: TextStyle(fontSize: 32),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        child: Icon(Icons.document_scanner_outlined),
         onPressed: () {},
-        backgroundColor: Color.fromARGB(255, 26, 222, 65),
+        backgroundColor: Colors.blueAccent,
       ),
     );
   }
@@ -140,12 +147,14 @@ class Page3 extends StatelessWidget {
       body: Center(
         child: Text(
           "Page 3",
-          style: TextStyle(fontSize: 28),
+          style: TextStyle(fontSize: 32),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        child: Icon(Icons.add),
         onPressed: () {},
-        backgroundColor: const Color.fromARGB(255, 222, 244, 54),
+        backgroundColor: Colors.red,
       ),
     );
   }
