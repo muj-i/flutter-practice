@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'pages.dart';
+import 'package:mod5asgmt/pages.dart';
 
 void main() {
   runApp(MyApp());
