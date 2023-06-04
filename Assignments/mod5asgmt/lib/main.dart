@@ -106,6 +106,8 @@ class _HomeActivityState extends State<HomeActivity> {
           Page3(),
         ],
       ),
+      
+      /// Using a exter package named google_nav_bar as bottom navigation bar
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 10, 29, 66).withAlpha(1000),
         child: Padding(
