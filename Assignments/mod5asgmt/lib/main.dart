@@ -111,7 +111,7 @@ class _HomeActivityState extends State<HomeActivity> {
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 10, 29, 66).withAlpha(1000),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
           child: GNav(
             backgroundColor: const Color.fromARGB(255, 10, 29, 66).withAlpha(0),
             color: Colors.white,
