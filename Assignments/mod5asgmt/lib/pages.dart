@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+mySnackbar(meaasge, context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(meaasge)));
+}
+
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,13 +19,7 @@ class Page1 extends StatelessWidget {
         elevation: 10,
         child: Icon(Icons.abc_rounded),
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                "Page 1 Floating Action Button",
-              ),
-            ),
-          );
+          mySnackbar("Page 1 FAB", context);
         },
         backgroundColor: Color.fromARGB(255, 10, 29, 66),
       ),
@@ -44,13 +42,7 @@ class Page2 extends StatelessWidget {
         elevation: 10,
         child: Icon(Icons.document_scanner_outlined),
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                "Page 2 Floating Action Button",
-              ),
-            ),
-          );
+          mySnackbar("Page 2 FAB", context);
         },
         backgroundColor: Colors.green,
       ),
@@ -73,13 +65,7 @@ class Page3 extends StatelessWidget {
         elevation: 10,
         child: Icon(Icons.add),
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                "Page 3 Floating Action Button",
-              ),
-            ),
-          );
+          mySnackbar("Page 3 FAB", context);
         },
         backgroundColor: Colors.red,
       ),
