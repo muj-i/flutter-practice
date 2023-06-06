@@ -91,7 +91,9 @@ class HomeAct extends StatelessWidget {
          style: TextStyle(fontSize: 34),
        ),
      ),
-     floatingActionButton: Container(
+     floatingActionButton: SizedBox(
+      height: 70,
+      width: 70,
        child: FloatingActionButton(
          onPressed: () {
            ScaffoldMessenger.of(context).showSnackBar(
