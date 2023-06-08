@@ -89,7 +89,7 @@ class HomeAct extends StatelessWidget {
                   ),
                   accountName: Text('muj'),
                   accountEmail: Text('mio'),
-                  currentAccountPicture: Image.asset('images/td.png'),
+                  currentAccountPicture: Image.asset('images/favicon.png'),
                 )),
             ListTile(
               leading: Icon(Icons.person_2_sharp),
