@@ -13,10 +13,47 @@ class dApp extends StatelessWidget {
   @override
   Widget build(Object context) {
     return MaterialApp(
-      home: HomeAct(),
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.purple,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              letterSpacing: .6,
+            ),
+          ),
+        ),
+        textTheme: const TextTheme(
+            // by default there are several default text styles like titleLarge
+            // you can access all of these by Theme.of(context).textTheme.yourDesireStyle
+            // even you can customize a previous style
+            ),
+      ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+        brightness: Brightness.dark,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              letterSpacing: .6,
+            ),
+          ),
+        ),
+    ),
+    home: HomeAct(),
     );
   }
+}
+
+MySnackBar(message, context) {
+  return ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(content: (Text(message))));
 }
 
 class HomeAct extends StatelessWidget {
@@ -61,76 +98,67 @@ class HomeAct extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-              children: [Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 9, 17, 237),
-                    borderRadius: BorderRadius.circular(50),
+
+      body: SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(children: [
+              //Image.network('http://img.alicdn.com/imgextra/i2/2210708939978/O1CN01HbReKK2NZylhg9O5M_!!2210708939978.jpg'),
+              InkWell(
+                splashColor: Colors.amber,
+                onTap: () => MySnackBar("vvbvv", context),
+                child: Image.network('https://img.alicdn.com/imgextra/i1/2210708939978/O1CN01ONijSX2NZylj6Ux8Z_!!2210708939978.jpg_100x100q90.jpg')),
+             Image.network('https://img.alicdn.com/imgextra/i4/2211895365080/O1CN01ufXL3g1nOgpC22AMU_!!0-item_pic.jpg')
+              ]),
+              Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 9, 176, 242),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                      "New App!",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
                   ),
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.symmetric(horizontal: 37.5000, vertical: 20),
-                  child: Text(
-                    "New !",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 233, 162, 30),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                      "New App!",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
                   ),
+                  
+                ],
+              ),
+              InkWell(child: 
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 30, 233, 50),
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 9, 176, 242),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "New App!",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  "New App!",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 233, 162, 30),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                    "New App!",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                
-              ],
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 233, 30, 196),
-                borderRadius: BorderRadius.circular(50),
               ),
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(20),
-              child: Text(
-                "New App!",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 30, 233, 50),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(20),
-              child: Text(
-                "New App!",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-              ),
-            ),
-          ]),
+              )
+            ]),
+      ),
+          
     );
   }
 }
