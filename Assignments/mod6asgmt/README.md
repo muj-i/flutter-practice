@@ -2,13 +2,17 @@
 
 A flutter project for the assignment of module 6
 
-<h1  align="center">
+#Screenshots
+*Full app view*
 ![Alt Text](screenshots/ss1.png)
+*Text field and keyboard text input action*
 ![Alt Text](screenshots/ss2.png)
+Snackbar by tapping on pictures
 ![Alt Text](screenshots/ss3.png)
+Snackbar by tapping on FAB
 ![Alt Text](screenshots/ss4.png)
-![Alt Text](screenshots/ss5.png)
-</h1>
+
+
 
 ## Getting Started
 
