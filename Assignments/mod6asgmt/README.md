@@ -2,13 +2,13 @@
 
 A flutter project for the assignment of module 6
 
-
+<h1  align="center">
 ![Alt Text](screenshots/ss1.png)
 ![Alt Text](screenshots/ss2.png)
 ![Alt Text](screenshots/ss3.png)
 ![Alt Text](screenshots/ss4.png)
 ![Alt Text](screenshots/ss5.png)
-
+</h1>
 
 ## Getting Started
 
