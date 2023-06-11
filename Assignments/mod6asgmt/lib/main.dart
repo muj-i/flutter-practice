@@ -21,8 +21,10 @@ MySnackBar(message, context) {
       .showSnackBar(SnackBar(content: (Text(message))));
 }
 
+
 class PhotoHomePage extends StatelessWidget {
   const PhotoHomePage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,49 +61,81 @@ class PhotoHomePage extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
-                Image.network(
-                    'https://lh3.googleusercontent.com/a/AAcHTtfvI2iKEfPIpw5-xPUTSCEfD5fHLMtfM4fB6NejOw=s96-c-rg-br100'),
+                Container(
+                  height: 120.0,
+                  width: 120.0,
+                  child: Material(
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5),
+                      onTap: () => MySnackBar("gtgrbrbgrbggrbvr", context),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            'https://images.unsplash.com/photo-1544376936-e15fd353d311?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60',
+                            fit: BoxFit.fill,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withAlpha(50),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                '1111',
+                                style: TextStyle(
+                                  backgroundColor: Colors.transparent,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                
               ],
             ),
             const SizedBox(height: 16),
             ListView(
               shrinkWrap: true,
-          
-              
-            children: const [
+              children: const [
                 ListTile(
-                  leading: Icon(Icons.photo),
-                   title: Text('data'),
-                   subtitle: Text('data'),
+                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
+                  title: Text('Camera',
+                  style: TextStyle(fontSize: 19),),
+                  subtitle: Text('5,298 photos',style: TextStyle(fontSize: 16),),
                 ),
-                 ListTile(
-                  leading: Icon(Icons.photo),
-                   title: Text('data'),
-                   subtitle: Text('data'),
-                )
+                ListTile(
+                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
+                  title: Text('Favourites'),
+                  subtitle: Text('data'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
+                  title: Text('Selfies'),
+                  subtitle: Text('data'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
+                  title: Text('Videos'),
+                  subtitle: Text('data'),
+                ),
               ],
-             ),
+            ),
           ],
         ),
       ),
-  floatingActionButton: FloatingActionButton(onPressed: () => MySnackBar("Photos Uploaded Successfully!", context),
-  child: Icon(Icons.cloud_upload_rounded),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => MySnackBar("Photos Uploaded Successfully!", context),
+        child: Icon(Icons.cloud_upload_rounded),
+      ),
     );
   }
 }
