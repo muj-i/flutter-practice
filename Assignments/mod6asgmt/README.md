@@ -4,7 +4,7 @@ A flutter project for the assignment of module 6
 
 
 <h1  align="center">
-  <img  src="https://www.icloud.com/iclouddrive/0014WDtk80wGUD6wlcoXGTnJA#ss1"  alt="palera1n logo">
+  <img  src="https://www.icloud.com/iclouddrive/0014WDtk80wGUD6wlcoXGTnJA#ss1">
   <p>palera1n</p>
 </h1>
 
