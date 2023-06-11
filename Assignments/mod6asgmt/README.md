@@ -3,7 +3,7 @@
 A flutter project for the assignment of module 6
 
 ## Screenshots
-Other screenshots are individually wrapped for faster loading of the repository.
+Other screenshots are individually wrapped below for faster loading of the repository.
 
 ## Full app view
 ![Alt Text](images/screenshots/ss1.png)
