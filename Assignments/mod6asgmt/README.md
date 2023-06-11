@@ -2,15 +2,15 @@
 
 A flutter project for the assignment of module 6
 
-#Screenshots
+## Screenshots
 
-[*Full app view*](screenshots/ss1.png)
+# [*Full app view*](screenshots/ss1.png)
 
-[*Text field and keyboard text input action*](screenshots/ss2.png)
+# [*Text field and keyboard text input action*](screenshots/ss2.png)
 
-[*Snackbar by tapping on pictures*](screenshots/ss3.png)
+# [*Snackbar by tapping on pictures*](screenshots/ss3.png)
 
-[*Snackbar by tapping on FAB*](screenshots/ss4.png)
+# [*Snackbar by tapping on FAB*](screenshots/ss4.png)
 
 
 
