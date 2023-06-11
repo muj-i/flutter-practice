@@ -94,7 +94,8 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
@@ -134,7 +135,8 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
@@ -174,7 +176,8 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
@@ -214,7 +217,8 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
@@ -254,7 +258,8 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
@@ -294,7 +299,8 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
