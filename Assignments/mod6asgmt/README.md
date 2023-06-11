@@ -6,7 +6,7 @@ A flutter project for the assignment of module 6
 
 *Full app view* !
 
-[Alt Text](screenshots/ss1.png)
+[*Full app view*](screenshots/ss1.png)
 
 *Text field and keyboard text input action*
 
