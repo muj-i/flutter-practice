@@ -3,9 +3,10 @@
 A flutter project for the assignment of module 6
 
 ## Screenshots
-Screenshots are individually wrapped for faster loading of the repository.
+Other screenshots are individually wrapped for faster loading of the repository.
 
-[*Full app view*](images/screenshots/ss1.png)
+## Full app view
+![Alt Text](images/screenshots/ss1.png)
 
 [*Text field and keyboard text input action*](images/screenshots/ss2.png)
 
