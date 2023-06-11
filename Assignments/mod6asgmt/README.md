@@ -4,6 +4,10 @@ A flutter project for the assignment of module 6
 
 
 ![Alt Text](screenshots/ss1.png)
+![Alt Text](screenshots/ss2.png)
+![Alt Text](screenshots/ss3.png)
+![Alt Text](screenshots/ss4.png)
+![Alt Text](screenshots/ss5.png)
 
 
 ## Getting Started
