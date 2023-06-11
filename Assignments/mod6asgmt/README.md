@@ -2,6 +2,12 @@
 
 A flutter project for the assignment of module 6
 
+
+<h1  align="center">
+  <img  src="https://avatars.githubusercontent.com/u/114239186?s=100&v=4"  alt="palera1n logo">
+  <p>palera1n</p>
+</h1>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

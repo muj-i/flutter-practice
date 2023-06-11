@@ -12,6 +12,7 @@ class PhotoApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Photo Gallery',
       home: PhotoHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -41,12 +42,13 @@ class PhotoHomePage extends StatelessWidget {
               padding: EdgeInsets.all(12.0),
               child: Text(
                 'Welcome to My Photo Gallery!',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
                     Icons.search,
