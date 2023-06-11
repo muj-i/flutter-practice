@@ -3,7 +3,7 @@
 A flutter project for the assignment of module 6
 
 
-![Alt Text](Assignments/mod6asgmt/screenshots/j.png)
+![Alt Text](screenshots/j.png)
 
 
 ## Getting Started
