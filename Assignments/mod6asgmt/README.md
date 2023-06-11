@@ -1,10 +1,15 @@
 # mod6asgmt
 
 A flutter project for the assignment of module 6
--#Screenshots
 
-*Full app view* ![Alt Text](screenshots/ss1.png)
+#Screenshots
+
+*Full app view* !
+
+[Alt Text](screenshots/ss1.png)
+
 *Text field and keyboard text input action*
+
 ![Alt Text](screenshots/ss2.png)
 Snackbar by tapping on pictures
 ![Alt Text](screenshots/ss3.png)
