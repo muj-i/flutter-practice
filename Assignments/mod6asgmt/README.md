@@ -1,6 +1,6 @@
 # mod6asgmt
 
-A new Flutter project.
+A flutter project for the assignment of module 6
 
 ## Getting Started
 

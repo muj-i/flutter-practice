@@ -16,42 +16,53 @@ class PhotoApp extends StatelessWidget {
   }
 }
 
-MySnackBar(message, context) {
+mySnackBar(message, context) {
   return ScaffoldMessenger.of(context)
       .showSnackBar(SnackBar(content: (Text(message))));
 }
 
-
 class PhotoHomePage extends StatelessWidget {
   const PhotoHomePage({super.key});
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Photo Gallery'),
-        backgroundColor: Colors.red,
+        title: const Text(
+          'Photo Gallery',
+          style: TextStyle(fontSize: 24),
+        ),
+        backgroundColor: const Color.fromARGB(206, 114, 87, 223),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.all(30.0),
+              padding: EdgeInsets.all(12.0),
               child: Text(
                 'Welcome to My Photo Gallery!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const TextField(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  label: Text('Search Photos'),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  label: const Text(
+                    'Search Photos',
+                    style: TextStyle(color: Colors.black, fontSize: 19),
+                  ),
                   hintText: 'Enter keywords...',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: Colors.grey),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                 ),
               ),
@@ -61,15 +72,16 @@ class PhotoHomePage extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                Container(
+                SizedBox(
                   height: 120.0,
                   width: 120.0,
                   child: Material(
-                    color: Colors.redAccent,
+                    color: const Color.fromARGB(206, 114, 87, 223),
                     borderRadius: BorderRadius.circular(5),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(5),
-                      onTap: () => MySnackBar("gtgrbrbgrbggrbvr", context),
+                      onTap: () =>
+                          mySnackBar("Clicked on photo leaves!", context),
                       child: Stack(
                         fit: StackFit.expand,
                         children: [
@@ -80,14 +92,15 @@ class PhotoHomePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
-                                color: Colors.blueGrey.withAlpha(50),
+                                color: Colors.blueGrey.withAlpha(150),
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: Text(
-                                '1111',
+                              child: const Text(
+                                'leaves',
                                 style: TextStyle(
+                                  color: Colors.white,
                                   backgroundColor: Colors.transparent,
                                   fontSize: 16,
                                 ),
@@ -99,7 +112,206 @@ class PhotoHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+                SizedBox(
+                  height: 120.0,
+                  width: 120.0,
+                  child: Material(
+                    color: const Color.fromARGB(206, 114, 87, 223),
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5),
+                      onTap: () =>
+                          mySnackBar("Clicked on photo nachos!", context),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            'https://images.pexels.com/photos/10621653/pexels-photo-10621653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                            fit: BoxFit.fill,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withAlpha(150),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Text(
+                                'nachos',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 120.0,
+                  width: 120.0,
+                  child: Material(
+                    color: const Color.fromARGB(206, 114, 87, 223),
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5),
+                      onTap: () =>
+                          mySnackBar("Clicked on photo roses!", context),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            'https://images.pexels.com/photos/10863553/pexels-photo-10863553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                            fit: BoxFit.fill,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withAlpha(150),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Text(
+                                'roses',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 120.0,
+                  width: 120.0,
+                  child: Material(
+                    color: const Color.fromARGB(206, 114, 87, 223),
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5),
+                      onTap: () =>
+                          mySnackBar("Clicked on photo dessert!", context),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            'https://images.pexels.com/photos/5945565/pexels-photo-5945565.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                            fit: BoxFit.fill,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withAlpha(150),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Text(
+                                'dessert',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 120.0,
+                  width: 120.0,
+                  child: Material(
+                    color: const Color.fromARGB(206, 114, 87, 223),
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5),
+                      onTap: () =>
+                          mySnackBar("Clicked on photo letters!", context),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            'https://images.pexels.com/photos/7784602/pexels-photo-7784602.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                            fit: BoxFit.fill,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withAlpha(150),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Text(
+                                'letters',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 120.0,
+                  width: 120.0,
+                  child: Material(
+                    color: const Color.fromARGB(206, 114, 87, 223),
+                    borderRadius: BorderRadius.circular(5),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(5),
+                      onTap: () =>
+                          mySnackBar("Clicked on photo oranges!", context),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            'https://images.pexels.com/photos/7235666/pexels-photo-7235666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                            fit: BoxFit.fill,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey.withAlpha(150),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Text(
+                                'oranges',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -107,25 +319,52 @@ class PhotoHomePage extends StatelessWidget {
               shrinkWrap: true,
               children: const [
                 ListTile(
-                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
-                  title: Text('Camera',
-                  style: TextStyle(fontSize: 19),),
-                  subtitle: Text('5,298 photos',style: TextStyle(fontSize: 16),),
+                  leading: Icon(Icons.photo_library_rounded,
+                      color: Color.fromARGB(206, 114, 87, 223), size: 40),
+                  title: Text(
+                    'Camera',
+                    style: TextStyle(fontSize: 19),
+                  ),
+                  subtitle: Text(
+                    '2,298 photos',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
-                  title: Text('Favourites'),
-                  subtitle: Text('data'),
+                  leading: Icon(Icons.photo_library_rounded,
+                      color: Color.fromARGB(206, 114, 87, 223), size: 40),
+                  title: Text(
+                    'Favourites',
+                    style: TextStyle(fontSize: 19),
+                  ),
+                  subtitle: Text(
+                    '182 photos',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
-                  title: Text('Selfies'),
-                  subtitle: Text('data'),
+                  leading: Icon(Icons.photo_library_rounded,
+                      color: Color.fromARGB(206, 114, 87, 223), size: 40),
+                  title: Text(
+                    'Selfies',
+                    style: TextStyle(fontSize: 19),
+                  ),
+                  subtitle: Text(
+                    '690 photos',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.photo_library_rounded,color: Color.fromARGB(206, 164, 87, 223),size: 40),
-                  title: Text('Videos'),
-                  subtitle: Text('data'),
+                  leading: Icon(Icons.photo_library_rounded,
+                      color: Color.fromARGB(206, 114, 87, 223), size: 40),
+                  title: Text(
+                    'Videos',
+                    style: TextStyle(fontSize: 19),
+                  ),
+                  subtitle: Text(
+                    '83 photos',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
               ],
             ),
@@ -133,8 +372,9 @@ class PhotoHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => MySnackBar("Photos Uploaded Successfully!", context),
-        child: Icon(Icons.cloud_upload_rounded),
+        backgroundColor: const Color.fromARGB(206, 114, 87, 223),
+        onPressed: () => mySnackBar("Photos Uploaded Successfully!", context),
+        child: const Icon(Icons.cloud_upload_rounded),
       ),
     );
   }
