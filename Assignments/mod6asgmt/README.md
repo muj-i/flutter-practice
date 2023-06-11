@@ -3,7 +3,7 @@
 A flutter project for the assignment of module 6
 
 
-![Alt Text](relative/path/to/image.png)
+![Alt Text](Assignments/mod6asgmt/screenshots/ss1.png)
 
 
 ## Getting Started
