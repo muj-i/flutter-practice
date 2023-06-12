@@ -370,7 +370,7 @@ class PhotoHomePage extends StatelessWidget {
                     style: TextStyle(fontSize: 19),
                   ),
                   subtitle: Text(
-                    '83 photos',
+                    '83 videos',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
