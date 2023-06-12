@@ -63,7 +63,8 @@ class PhotoHomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     borderSide: const BorderSide(color: Colors.grey),
                   ),
-                  focusedBorder: const OutlineInputBorder(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(color: Colors.black),
                   ),
                 ),
