@@ -11,7 +11,7 @@ Other screenshots are individually wrapped below for faster loading of the repos
 [*Dialog box*](assets/screenshots/ss2.png)
 
 [*Cart Page*](assets/screenshots/ss3.png)
-![Alt Text](assets/screenshots/ss4.png)
+
 
 
 
