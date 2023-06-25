@@ -71,12 +71,9 @@
 /Users/muj/.pub-cache/hosted/pub.dev/file-6.1.4/lib/src/io.dart
 /Users/muj/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/LICENSE
-/Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/lib/font_awesome_flutter.dart
 /Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/lib/fonts/fa-brands-400.ttf
 /Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/lib/fonts/fa-regular-400.ttf
 /Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/lib/fonts/fa-solid-900.ttf
-/Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/lib/src/fa_icon.dart
-/Users/muj/.pub-cache/hosted/pub.dev/font_awesome_flutter-10.4.0/lib/src/icon_data.dart
 /Users/muj/.pub-cache/hosted/pub.dev/js-0.6.7/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/lints-2.1.1/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/matcher-0.12.16/LICENSE
@@ -160,7 +157,6 @@
 /Users/muj/.pub-cache/hosted/pub.dev/process-4.2.4/lib/src/interface/process_manager.dart
 /Users/muj/.pub-cache/hosted/pub.dev/process-4.2.4/lib/src/interface/process_wrapper.dart
 /Users/muj/.pub-cache/hosted/pub.dev/shared_preferences-2.1.2/LICENSE
-/Users/muj/.pub-cache/hosted/pub.dev/shared_preferences-2.1.2/lib/shared_preferences.dart
 /Users/muj/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/lib/shared_preferences_android.dart
 /Users/muj/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/lib/src/messages.g.dart
@@ -182,17 +178,6 @@
 /Users/muj/.pub-cache/hosted/pub.dev/term_glyph-1.2.1/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/test_api-0.6.0/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/LICENSE
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/controller/save_adapter.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/controller/shared_preferences_adapter.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/controller/theme_controller.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/data/app_theme.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/data/app_theme_options.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/provider/inherited_theme.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/provider/theme_consumer.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/provider/theme_provider.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/widgets/cycle_theme_icon_button.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/src/widgets/theme_dialog.dart
-/Users/muj/.pub-cache/hosted/pub.dev/theme_provider-0.6.0/lib/theme_provider.dart
 /Users/muj/.pub-cache/hosted/pub.dev/vector_math-2.1.4/LICENSE
 /Users/muj/.pub-cache/hosted/pub.dev/vector_math-2.1.4/lib/src/vector_math_64/aabb2.dart
 /Users/muj/.pub-cache/hosted/pub.dev/vector_math-2.1.4/lib/src/vector_math_64/aabb3.dart
@@ -1091,6 +1076,5 @@
 /Users/muj/flutter/packages/flutter_tools/lib/src/build_system/targets/common.dart
 /Users/muj/flutter/packages/flutter_tools/lib/src/build_system/targets/icon_tree_shaker.dart
 /Users/muj/flutter/packages/flutter_tools/lib/src/build_system/targets/macos.dart
-/Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/lib/home2.dart
-/Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/lib/main.dart
+/Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/lib/home.dart
 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/pubspec.yaml
