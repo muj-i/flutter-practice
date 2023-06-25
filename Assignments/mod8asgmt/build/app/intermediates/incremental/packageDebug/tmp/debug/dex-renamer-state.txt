@@ -1,0 +1,4 @@
+#Sun Jun 25 01:01:22 BDT 2023
+base.0=/Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

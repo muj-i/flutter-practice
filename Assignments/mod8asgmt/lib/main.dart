@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'home.dart';
-
-// TODO 1 - Button for switch theme
-// TODO 2 - Update todo
-// TODO 3 - Update the ui design of bottom sheet
+import 'home2.dart';
 
 main() {
   runApp(const MyApp());

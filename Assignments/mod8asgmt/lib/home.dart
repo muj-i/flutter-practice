@@ -1,187 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  //const HomeScreen({Key? key}) : super(key: key);
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _titleTEController = TextEditingController();
-  final TextEditingController _descriptionTEController =
-      TextEditingController();
-
-  List<Todo> todos = [];
+  List<Task> tasks = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 22,
-        title: const Text('Home'),
-        actions: [
-          IconButton(
-              icon: ThemeProvider.controllerOf(context).currentThemeId ==
-                      'custom_theme_dark'
-                  ? Icon(Icons.lightbulb_outline)
-                  : Icon(Icons.lightbulb_rounded),
-              onPressed: () {
-                ThemeProvider.controllerOf(context).nextTheme();
-              }),
-          IconButton(
-            onPressed: () {
-              if (todos.isEmpty) {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Expanded(
-                          child: AlertDialog(
-                        title: Text('No item found'),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('Okay')),
-                        ],
-                      ));
-                    });
-              } else {
-                MyAletrtDialog(context);
-              }
-            },
-            icon: const Icon(Icons.highlight_remove),
-          )
-        ],
+        title: const Text('Task Management List'),
       ),
       body: ListView.separated(
-        itemCount: todos.length,
+        itemCount: tasks.length,
         itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: todos[index].isDone
-                  ? const Color.fromARGB(255, 3, 73, 39)
-                  : Colors.redAccent,
-            ),
-            child: ListTile(
-              onLongPress: () {
-                todos[index].isDone = !todos[index].isDone;
-                if (mounted) {
-                  setState(() {});
-                }
-              },
-              title: Text(todos[index].title),
-              subtitle: Text(
-                todos[index].description,
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _titleTEController.text = todos[index].title;
-                      _descriptionTEController.text = todos[index].description;
-
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                const Text(
-                                  'Edit Todo',
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    controller: _titleTEController,
-                                    decoration: InputDecoration(
-                                      labelText: 'Enter Title',
-                                      hintText: 'Title',
-                                      border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black),
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    controller: _descriptionTEController,
-                                    decoration: InputDecoration(
-                                      labelText: 'Enter Description',
-                                      hintText: 'Description',
-                                      border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black),
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    if (_titleTEController.text
-                                            .trim()
-                                            .isNotEmpty &&
-                                        _descriptionTEController.text
-                                            .trim()
-                                            .isNotEmpty) {
-                                      todos[index].title =
-                                          _titleTEController.text.trim();
-                                      todos[index].description =
-                                          _descriptionTEController.text.trim();
-                                      if (mounted) {
-                                        setState(() {});
-                                      }
-                                      _titleTEController.clear();
-                                      _descriptionTEController.clear();
-                                      Navigator.pop(context);
-                                    }
-                                  },
-                                  child: const Text('Edit Todo'),
-                                )
-                              ],
-                            ),
-                          );
-                          //     return Container(
-                          //       height: 200,
-                          //       child: Center(
-                          //         child: Text('Bottom Modal Sheet'),
-                          //       ),
-                          //     );
-                        },
-                      );
-                    },
-                    child: Icon(Icons.edit),
-                  ),
-                  SizedBox(width: 16),
-                  GestureDetector(
-                    onTap: () {
-                      todos.removeAt(index);
-                      if (mounted) {
-                        setState(() {});
-                      }
-                    },
-                    child: Icon(Icons.delete),
-                  ),
-                ],
-              ),
-            ),
+          return ListTile(
+            title: Text(tasks[index].title),
+            subtitle: Text(tasks[index].description),
+            onTap: () => _openTaskDetails(tasks[index]),
+            onLongPress: () => _showDeleteTaskBottomSheet(tasks[index]),
           );
         },
         separatorBuilder: (context, index) {
@@ -191,88 +31,145 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Do you want to delete permanently?'),
-                  content: Column(
-                    children: [
-                      TextField(
-                        controller: _titleTEController,
-                        decoration: InputDecoration(hintText: 'Name'),
-                      ),
-                      TextField(
-                        controller: _descriptionTEController,
-                        decoration: InputDecoration(hintText: 'Name'),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(hintText: 'Name'),
-                      ),
-                    ],
-                  ),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          if (_titleTEController.text.trim().isNotEmpty &&
-                              _descriptionTEController.text.trim().isNotEmpty) {
-                            todos.add(Todo(_titleTEController.text.trim(),
-                                _descriptionTEController.text.trim(), false));
-                            if (mounted) {
-                              setState(() {});
-                            }
-                            _titleTEController.clear();
-                            _descriptionTEController.clear();
-                            Navigator.pop(context);
-                          }
-                        },
-                        child: Text('add')),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('cancel')),
-                  ],
-                );
-              });
-        },
+        onPressed: () => _showAddTaskDialog(),
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  MyAletrtDialog(context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Expanded(
-              child: AlertDialog(
-            title: Text('Do you want to delete permanently?'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    todos.clear();
-                    if (mounted) {
-                      setState(() {});
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Yes')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('No')),
+  void _showAddTaskDialog() {
+    String title = '';
+    String description = '';
+    String deadline = '';
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add Task'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: 'Title'),
+                onChanged: (value) => title = value,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Description'),
+                onChanged: (value) => description = value,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Deadline'),
+                onChanged: (value) => deadline = value,
+              ),
             ],
-          ));
-        });
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                if (title.isNotEmpty &&
+                    description.isNotEmpty &&
+                    deadline.isNotEmpty) {
+                  final newTask = Task(
+                    title: title,
+                    description: description,
+                    deadline: deadline,
+                  );
+                  setState(() {
+                    tasks.add(newTask);
+                  });
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _openTaskDetails(Task task) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Task Details',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 16.0),
+              Text('Title: ${task.title}'),
+              Text('Description: ${task.description}'),
+              Text('Deadline: ${task.deadline.toString()}'),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    tasks.remove(task);
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: Text('Delete'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showDeleteTaskBottomSheet(Task task) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Delete Task',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 16.0),
+              Text('Are you sure you want to delete this task?'),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    tasks.remove(task);
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: Text('Delete'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
-class Todo {
-  String title, description;
-  bool isDone;
+class Task {
+  final String title;
+  final String description;
+  final String deadline;
 
-  Todo(this.title, this.description, this.isDone);
+  Task({
+    required this.title,
+    required this.description,
+    required this.deadline,
+  });
 }

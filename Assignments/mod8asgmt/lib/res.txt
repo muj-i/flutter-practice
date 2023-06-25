@@ -1,0 +1,46 @@
+form validation
+/under state 
+final GlobalKey<FormState> _formValidationKey = GlobalKey<FormState>();
+
+/Wrap widget column with widget Form & add the key
+content: Form(
+                    key: _formValidationKey,
+                    child: Column(
+
+
+/change tesxtfield to textformfiled and add validatir:
+children: [
+                        TextFormField(
+                          controller: _titleController,
+                          decoration: InputDecoration(hintText: 'Tittle'),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Please enter a tittle.';
+                            }
+                            return null;
+                          },
+                        ),
+]
+                    )
+),
+
+/ in action 
+actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formValidationKey.currentState!.validate()) {
+                          tasks.add(Task(
+                            _titleController.text.trim(),
+                            
+                          ));
+                          if (mounted) {
+                            setState(() {});
+                          }
+                          _titleController.clear();
+                          
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text('Save'),
+                    )
+                  ],
