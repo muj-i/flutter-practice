@@ -38,6 +38,7 @@ dependencies:
   theme_provider: ^0.6.0
   font_awesome_flutter: ^10.4.0
   
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

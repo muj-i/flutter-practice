@@ -1,71 +1,261 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DateTime? selectedDate;
-  TimeOfDay? selectedTime;
+  final GlobalKey<FormState> _formValidationKey = GlobalKey<FormState>();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _textEditingDateTimeController =
+      TextEditingController();
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+  DateTime? _selectedDateTime;
+
+  List<Task> tasks = [];
+
+  Future<void> _selectDateTime() async {
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2030),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
     );
 
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
+    if (pickedDate != null) {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+
+      if (pickedTime != null) {
+        setState(() {
+          _selectedDateTime = DateTime(
+            pickedDate.year,
+            pickedDate.month,
+            pickedDate.day,
+            pickedTime.hour,
+            pickedTime.minute,
+          );
+          _textEditingDateTimeController.text = _selectedDateTime.toString();
+        });
+      }
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
+  @override
+  void dispose() {
+    _textEditingDateTimeController.dispose();
+    super.dispose();
+  }
 
-    if (picked != null && picked != selectedTime) {
-      setState(() {
-        selectedTime = picked;
-      });
-    }
+  void _openTaskDetails(Task task) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Task Details',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 16.0),
+              Text('Title: ${task.title}'),
+              Text('Description: ${task.description}'),
+              Text('Deadline: ${task.deadline.toString()}'),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    tasks.remove(task);
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: Text('Delete'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Date Time Picker Demo'),
+        elevation: 50,
+        title: const Text('Task Management List'),
+        actions: [
+          IconButton(
+              icon: ThemeProvider.controllerOf(context).currentThemeId ==
+                      'custom_theme_dark'
+                  ? const Icon(FontAwesomeIcons.lightbulb)
+                  : const Icon(FontAwesomeIcons.solidLightbulb),
+              onPressed: () {
+                ThemeProvider.controllerOf(context).nextTheme();
+              }),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Select Date'),
-            ),
-            ElevatedButton(
-              onPressed: () => _selectTime(context),
-              child: Text('Select Time'),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Selected Date: ${selectedDate != null ? selectedDate.toString() : 'Not selected'}',
-            ),
-            Text(
-              'Selected Time: ${selectedTime != null ? '${selectedTime?.hour}:${selectedTime?.minute}' : 'Not selected'}',
-            ),
-          ],
-        ),
+      body: ListView.separated(
+        itemCount: tasks.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(
+            height: 1,
+          );
+        },
+        itemBuilder: (context, index) {
+          return Container(
+            child: ListTile(
+                title: Text(tasks[index].title),
+                subtitle: Column(
+                  children: [
+                    Text(tasks[index].description),
+                    Text(
+                      'Deadline: ${tasks[index].deadline}',
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                onLongPress: () {
+                  _openTaskDetails(tasks[index]);
+                }),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Add New Task"),
+                  content: Form(
+                    key: _formValidationKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            labelText: 'Enter tittle',
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            suffixIcon: Icon(Icons.text_fields_rounded),
+                          ),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Please enter a tittle.';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        TextFormField(
+                          controller: _descriptionController,
+                          decoration: InputDecoration(
+                            labelText: 'Enter description',
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            suffixIcon: Icon(Icons.description_rounded),
+                          ),
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Please enter a description.';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        TextFormField(
+                          controller: _textEditingDateTimeController,
+                          readOnly: true,
+                          onTap: _selectDateTime,
+                          decoration: InputDecoration(
+                            labelText: 'Select deadline',
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            suffixIcon: Icon(Icons.calendar_month_rounded),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please select a deadline.';
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors
+                            .redAccent, // Set the desired background color
+                      ),
+                      child: Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formValidationKey.currentState!.validate()) {
+                          tasks.add(Task(
+                            _titleController.text.trim(),
+                            _descriptionController.text.trim(),
+                            _selectedDateTime!,
+                          ));
+                          if (mounted) {
+                            setState(() {});
+                          }
+                          _titleController.clear();
+                          _descriptionController.clear();
+                          _textEditingDateTimeController.clear();
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text('Save'),
+                    )
+                  ],
+                );
+              });
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
+}
+
+class Task {
+  String title, description;
+  DateTime deadline;
+
+  Task(this.title, this.description, this.deadline);
 }
