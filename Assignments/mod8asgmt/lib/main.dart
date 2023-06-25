@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'home4.dart';
+import 'home5.dart';
 
 main() {
   runApp(const MyApp());
@@ -35,7 +35,12 @@ class MyApp extends StatelessWidget {
           builder: (themeContext) => MaterialApp(
             theme: ThemeProvider.themeOf(themeContext).data,
             title: 'Material App',
-            home: HomeScreen(),
+            //home: HomeScreen(),
+            home: Material(
+              child: Center(
+                child: HomeScreen(),
+              ),
+            ),
             debugShowCheckedModeBanner: false,
           ),
         ),
