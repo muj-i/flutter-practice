@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'home copy 2.dart';
+import 'home_screen.dart';
 
 main() {
   runApp(const MyApp());
