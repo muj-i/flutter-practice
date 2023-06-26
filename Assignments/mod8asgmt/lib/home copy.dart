@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  title: Text("Add New Task"),
+                                  title: Text("Edit Task"),
                                   content: Form(
                                     key: _formValidationKey,
                                     child: Column(
@@ -185,16 +185,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onPressed: () {
                                         if (_formValidationKey.currentState!
                                             .validate()) {
-                                          task.title =
-                                              _titleController.text.trim();
-                                          task.description =
-                                              _descriptionController.text
-                                                  .trim();
-                                          task.deadline = _selectedDateTime!;
+                                          setState(() {
+                                            task.title =
+                                                _titleController.text.trim();
+                                            task.description =
+                                                _descriptionController.text
+                                                    .trim();
+                                            task.deadline = _selectedDateTime!;
 
+                                            if (mounted) {
+                                              setState(() {});
+                                            }
+                                            _titleController.clear();
+                                            _descriptionController.clear();
+                                            _textEditingDateTimeController
+                                                .clear();
+                                            Navigator.pop(context);
+                                          });
                                           Navigator.pop(context);
                                         }
-                                        setState(() {});
                                       },
                                       child: Text('Edit Save'),
                                     )
