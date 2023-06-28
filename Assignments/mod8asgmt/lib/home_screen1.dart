@@ -23,14 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Task> tasks = [];
 
   Future<void> _selectDateTime() async {
-    final DateTime? pickedDate = await showDatePicker(
+    final DateTime? pickedDateTime = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
 
-    if (pickedDate != null) {
+    if (pickedDateTime != null) {
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
@@ -39,9 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
       if (pickedTime != null) {
         setState(() {
           _selectedDateTime = DateTime(
-            pickedDate.year,
-            pickedDate.month,
-            pickedDate.day,
+            pickedDateTime.year,
+            pickedDateTime.month,
+            pickedDateTime.day,
             pickedTime.hour,
             pickedTime.minute,
           );
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return Container(
-              width: double.infinity,
+              // width: double.infinity,
               padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -261,7 +261,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -288,6 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         itemBuilder: (context, index) {
+          final task = tasks[index];
           return Container(
             child: Container(
               margin: EdgeInsets.all(10),
@@ -307,16 +307,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         return const Color.fromARGB(255, 224, 224, 255);
                       },
                     ),
-                    value: isChecked,
+                    value: task.isChecked,
                     onChanged: (bool? value) {
                       setState(() {
-                        isChecked = value ?? false;
+                        task.isChecked = value ?? false;
                       });
                     },
                   ),
                   onTap: () {
                     setState(() {
-                      isChecked = !isChecked;
+                      task.isChecked = !task.isChecked;
                     });
                   },
                   title: Padding(
@@ -447,9 +447,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         if (_formValidationKey.currentState!.validate()) {
                           tasks.add(Task(
-                            _titleController.text.trim(),
-                            _descriptionController.text.trim(),
-                            _selectedDateTime!,
+                            title: _titleController.text.trim(),
+                            description: _descriptionController.text.trim(),
+                            deadline: _selectedDateTime!,
+                            isChecked: false,
                           ));
                           if (mounted) {
                             setState(() {});
@@ -475,10 +476,11 @@ class _HomeScreenState extends State<HomeScreen> {
 class Task {
   String title, description;
   DateTime deadline;
+  bool isChecked;
 
   Task(
-    this.title,
-    this.description,
-    this.deadline,
-  );
+      {required this.title,
+      required this.description,
+      required this.deadline,
+      required this.isChecked});
 }

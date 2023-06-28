@@ -23,14 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Task> tasks = [];
 
   Future<void> _selectDateTime() async {
-    final DateTime? pickedDate = await showDatePicker(
+    final DateTime? pickedDateTime = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
 
-    if (pickedDate != null) {
+    if (pickedDateTime != null) {
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
@@ -39,9 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
       if (pickedTime != null) {
         setState(() {
           _selectedDateTime = DateTime(
-            pickedDate.year,
-            pickedDate.month,
-            pickedDate.day,
+            pickedDateTime.year,
+            pickedDateTime.month,
+            pickedDateTime.day,
             pickedTime.hour,
             pickedTime.minute,
           );
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return Container(
-              width: double.infinity,
+              // width: double.infinity,
               padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -101,13 +101,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: 10,
                       ),
-                      Center(
-                        child: Text(
-                          'Task Details',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      Text(
+                        'Task Details',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -118,136 +116,139 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text('Deadline: ${task.deadline.toString()}'),
                   SizedBox(height: 16.0),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 16.0),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Edit Task"),
-                                    content: Form(
-                                      key: _formValidationKey,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextFormField(
-                                            controller: _titleController,
-                                            decoration: InputDecoration(
-                                              labelText: 'Enter tittle',
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.black),
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
+                      SizedBox(height: 8.0),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Edit Task"),
+                                      content: Form(
+                                        key: _formValidationKey,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextFormField(
+                                              controller: _titleController,
+                                              decoration: InputDecoration(
+                                                labelText: 'Enter tittle',
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black),
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                ),
+                                                suffixIcon: Icon(
+                                                    Icons.text_fields_rounded),
                                               ),
-                                              suffixIcon: Icon(
-                                                  Icons.text_fields_rounded),
+                                              validator: (value) {
+                                                if (value!.trim().isEmpty) {
+                                                  return 'Please enter a tittle.';
+                                                }
+                                                return null;
+                                              },
                                             ),
-                                            validator: (value) {
-                                              if (value!.trim().isEmpty) {
-                                                return 'Please enter a tittle.';
-                                              }
-                                              return null;
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          TextFormField(
-                                            controller: _descriptionController,
-                                            decoration: InputDecoration(
-                                              labelText: 'Enter description',
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.black),
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              controller:
+                                                  _descriptionController,
+                                              decoration: InputDecoration(
+                                                labelText: 'Enter description',
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black),
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                ),
+                                                suffixIcon: Icon(
+                                                    Icons.description_rounded),
                                               ),
-                                              suffixIcon: Icon(
-                                                  Icons.description_rounded),
+                                              validator: (value) {
+                                                if (value!.trim().isEmpty) {
+                                                  return 'Please enter a description.';
+                                                }
+                                                return null;
+                                              },
                                             ),
-                                            validator: (value) {
-                                              if (value!.trim().isEmpty) {
-                                                return 'Please enter a description.';
-                                              }
-                                              return null;
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          TextFormField(
-                                            controller:
-                                                _textEditingDateTimeController,
-                                            readOnly: true,
-                                            onTap: _selectDateTime,
-                                            decoration: InputDecoration(
-                                              labelText: 'Select deadline',
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Colors.black),
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            TextFormField(
+                                              controller:
+                                                  _textEditingDateTimeController,
+                                              readOnly: true,
+                                              onTap: _selectDateTime,
+                                              decoration: InputDecoration(
+                                                labelText: 'Select deadline',
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black),
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                ),
+                                                suffixIcon: Icon(Icons
+                                                    .calendar_month_rounded),
                                               ),
-                                              suffixIcon: Icon(
-                                                  Icons.calendar_month_rounded),
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return 'Please select a deadline.';
+                                                }
+                                                return null;
+                                              },
                                             ),
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return 'Please select a deadline.';
-                                              }
-                                              return null;
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          foregroundColor: Colors
-                                              .redAccent, // Set the desired background color
+                                          ],
                                         ),
-                                        child: Text('Cancel'),
                                       ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          if (_formValidationKey.currentState!
-                                              .validate()) {
-                                            _editTask(task);
-                                            if (mounted) {
-                                              setState(() {});
+                                      actions: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Colors
+                                                .redAccent, // Set the desired background color
+                                          ),
+                                          child: Text('Cancel'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            if (_formValidationKey.currentState!
+                                                .validate()) {
+                                              _editTask(task);
+                                              if (mounted) {
+                                                setState(() {});
+                                              }
+                                              Navigator.pop(context);
                                             }
                                             Navigator.pop(context);
-                                          }
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Save changes'),
-                                      )
-                                    ],
-                                  );
-                                });
-                          },
-                          child: Text('Edit task'),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _deleteTask(task);
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors
-                              .redAccent, // Set the desired background color
-                        ),
-                        child: Text('Delete'),
+                                          },
+                                          child: Text('Update Save'),
+                                        )
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Text('Edit task'),
+                          ),
+                          SizedBox(width: 8),
+                          ElevatedButton(
+                            onPressed: () {
+                              _deleteTask(task);
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors
+                                  .redAccent, // Set the desired background color
+                            ),
+                            child: Text('Delete'),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -286,24 +287,74 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         itemBuilder: (context, index) {
+          final task = tasks[index];
           return Container(
-            child: ListTile(
-                title: Text(tasks[index].title),
-                subtitle: Column(
-                  children: [
-                    Text(tasks[index].description),
-                    Text(
-                      'Deadline: ${tasks[index].deadline}',
+            child: Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                color: const Color.fromARGB(255, 111, 118, 191),
+              ),
+              child: ListTile(
+                  leading: Checkbox(
+                    checkColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          7.0), // Adjust the circular radius here
+                    ),
+                    fillColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        return const Color.fromARGB(255, 224, 224, 255);
+                      },
+                    ),
+                    value: task.isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        task.isChecked = value ?? false;
+                      });
+                    },
+                  ),
+                  onTap: () {
+                    setState(() {
+                      task.isChecked = !task.isChecked;
+                    });
+                  },
+                  title: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      tasks[index].title,
                       style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.grey,
+                        fontSize: 16,
+                        color: Colors.white,
                       ),
                     ),
-                  ],
-                ),
-                onLongPress: () {
-                  _openTaskDetails(tasks[index], index);
-                }),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          tasks[index].description,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Deadline: ${tasks[index].deadline}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onLongPress: () {
+                    _openTaskDetails(tasks[index], index);
+                  }),
+            ),
           );
         },
       ),
@@ -396,9 +447,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         if (_formValidationKey.currentState!.validate()) {
                           tasks.add(Task(
-                            _titleController.text.trim(),
-                            _descriptionController.text.trim(),
-                            _selectedDateTime!,
+                            title: _titleController.text.trim(),
+                            description: _descriptionController.text.trim(),
+                            deadline: _selectedDateTime!,
+                            isChecked: false,
                           ));
                           if (mounted) {
                             setState(() {});
@@ -424,6 +476,11 @@ class _HomeScreenState extends State<HomeScreen> {
 class Task {
   String title, description;
   DateTime deadline;
+  bool isChecked;
 
-  Task(this.title, this.description, this.deadline);
+  Task(
+      {required this.title,
+      required this.description,
+      required this.deadline,
+      required this.isChecked});
 }

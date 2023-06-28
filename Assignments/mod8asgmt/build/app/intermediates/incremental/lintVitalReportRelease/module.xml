@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="/Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/android/app"
+    name=":app"
+    type="APP"
+    maven="android:app:"
+    gradle="7.3.0"
+    buildFolder="/Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod8asgmt/build/app"
+    bootClassPath="/Users/muj/Library/Android/sdk/platforms/android-33/android.jar:/Users/muj/Library/Android/sdk/build-tools/30.0.3/core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-33">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>
