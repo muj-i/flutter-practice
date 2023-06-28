@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'home_screen1.dart';
+import 'home_screen2.dart';
 
 main() {
   runApp(const MyApp());
