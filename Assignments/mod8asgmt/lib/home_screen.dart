@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:theme_provider/theme_provider.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,9 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  DateTime? _selectedDateTime;
-
   List<Task> tasks = [];
+  DateTime? _selectedDateTime;
 
   Future<void> _selectDateTime() async {
     final DateTime? pickedDateTime = await showDatePicker(
@@ -52,26 +52,32 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _editTask(Task task) {
-    //_tasks.add(task);
     setState(() {
       task.title = _titleController.text.trim();
       task.description = _descriptionController.text.trim();
 
       task.deadline = _selectedDateTime!;
-
-      _titleController.clear();
-      _descriptionController.clear();
-      _textEditingDateTimeController.clear();
     });
   }
 
   void _deleteTask(Task task) {
     setState(() {
       tasks.remove(task);
+      _resetFields();
     });
   }
 
+  void _resetFields() {
+    _titleController.clear();
+    _descriptionController.clear();
+    _textEditingDateTimeController.clear();
+  }
+
   void _openTaskDetails(Task task, int index) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _resetFields();
+    });
+
     _titleController.text = task.title;
     _descriptionController.text = task.description;
     _selectedDateTime = task.deadline;
@@ -86,34 +92,42 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors
-                              .redAccent, // Set the desired background color
-                        ),
-                        child: Text('Close'),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors
+                            .redAccent, // Set the desired background color
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Task Details',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                      child: Icon(FontAwesomeIcons.squareXmark),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Task Details',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 16.0),
-                  Text('Title: ${task.title}'),
-                  Text('Description: ${task.description}'),
-                  Text('Deadline: ${task.deadline.toString()}'),
+                  Text(
+                    'Title: ${task.title}',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  Text(
+                    'Description: ${task.description}',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    'Deadline: ${DateFormat('yyyy-MM-dd HH:mm').format(task.deadline)}',
+                    style: TextStyle(fontSize: 15),
+                  ),
                   SizedBox(height: 16.0),
                   Row(
                     children: [
@@ -122,6 +136,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
+                              setState(() {
+                                _selectedDateTime = task.deadline;
+                              });
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -158,6 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             TextFormField(
                                               controller:
                                                   _descriptionController,
+                                              maxLines: 2,
                                               decoration: InputDecoration(
                                                 labelText: 'Enter description',
                                                 border: OutlineInputBorder(
@@ -246,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               foregroundColor: Colors
                                   .redAccent, // Set the desired background color
                             ),
-                            child: Text('Delete'),
+                            child: const Text('Delete'),
                           ),
                         ],
                       ),
@@ -277,14 +295,36 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 ThemeProvider.controllerOf(context).nextTheme();
               }),
+          IconButton(
+            onPressed: () {
+              if (tasks.isEmpty) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Expanded(
+                          child: AlertDialog(
+                        title: Text('No item found'),
+                        actions: [
+                          OutlinedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Okay')),
+                        ],
+                      ));
+                    });
+              } else {
+                MyAlertDialog(context);
+              }
+            },
+            icon: const Icon(FontAwesomeIcons.circleXmark),
+          )
         ],
       ),
       body: ListView.separated(
         itemCount: tasks.length,
         separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            height: 1,
-          );
+          return Container();
         },
         itemBuilder: (context, index) {
           final task = tasks[index];
@@ -341,13 +381,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        Text(
-                          'Deadline: ${tasks[index].deadline}',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -392,6 +425,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         TextFormField(
                           controller: _descriptionController,
+                          maxLines: 2,
                           decoration: InputDecoration(
                             labelText: 'Enter description',
                             border: OutlineInputBorder(
@@ -455,9 +489,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (mounted) {
                             setState(() {});
                           }
-                          _titleController.clear();
-                          _descriptionController.clear();
-                          _textEditingDateTimeController.clear();
+                          _resetFields();
                           Navigator.pop(context);
                         }
                       },
@@ -470,6 +502,37 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  MyAlertDialog(context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Expanded(
+              child: AlertDialog(
+            title: Text('Do you want to delete permanently?'),
+            actions: [
+              OutlinedButton(
+                  onPressed: () {
+                    tasks.clear();
+                    if (mounted) {
+                      setState(() {});
+                    }
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor:
+                        Colors.redAccent, // Set the desired background color
+                  ),
+                  child: Text('Yes')),
+              OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('No')),
+            ],
+          ));
+        });
   }
 }
 

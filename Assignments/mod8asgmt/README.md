@@ -1,16 +1,21 @@
 # mod8asgmt
 
-A new Flutter project.
+A flutter project for the assignment of module 8
 
-## Getting Started
+## Task Management App
 
-This project is a starting point for a Flutter application.
+## Screenshots
+Other screenshots are individually wrapped below for faster loading of the repository.
+[*Dialog box*](assets/screenshots/ss2.png)
 
-A few resources to get you started if this is your first Flutter project:
+[*Cart Page*](assets/screenshots/ss3.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Full app view
+![Alt Text](assets/screenshots/ss1.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
+
+

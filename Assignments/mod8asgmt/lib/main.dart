@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'home_screen1.dart';
+import 'home_screen.dart';
 
 main() {
   runApp(const MyApp());
@@ -30,17 +30,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
+      defaultThemeId: 'custom_theme_dark',
       child: ThemeConsumer(
         child: Builder(
           builder: (themeContext) => MaterialApp(
             theme: ThemeProvider.themeOf(themeContext).data,
             title: 'Material App',
             home: HomeScreen(),
-            // home: Material(
-            //   child: Center(
-            //     child: HomeScreen(),
-            //   ),
-            // ),
             debugShowCheckedModeBanner: false,
           ),
         ),
