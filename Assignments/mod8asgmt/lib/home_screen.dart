@@ -129,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 16.0),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 8.0),
                       Row(
@@ -172,6 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               height: 8,
                                             ),
                                             TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
                                               controller:
                                                   _descriptionController,
                                               maxLines: 2,
@@ -258,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(6)),
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: 10),
                           ElevatedButton(
                             onPressed: () {
                               _deleteTask(task);
@@ -437,6 +440,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 8,
                         ),
                         TextFormField(
+                          textInputAction: TextInputAction.done,
                           controller: _descriptionController,
                           maxLines: 2,
                           decoration: InputDecoration(
