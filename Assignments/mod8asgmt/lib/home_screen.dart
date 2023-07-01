@@ -99,8 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.pop(context);
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors
-                            .redAccent, // Set the desired background color
+                        foregroundColor: Colors.redAccent,
                       ),
                       child: Icon(FontAwesomeIcons.squareXmark),
                     ),
@@ -338,7 +337,10 @@ class _HomeScreenState extends State<HomeScreen> {
               margin: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: const Color.fromARGB(255, 111, 118, 191),
+                color: task.isChecked
+                    ? Colors.grey.shade800
+                    : Color.fromARGB(255, 111, 118, 191),
+                //color: const Color.fromARGB(255, 111, 118, 191),
               ),
               child: ListTile(
                   leading: Checkbox(
@@ -370,7 +372,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       tasks[index].title,
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.white,
+                        color: task.isChecked ? Colors.grey : Colors.white,
+                        decoration: task.isChecked
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
                       ),
                     ),
                   ),
@@ -383,7 +388,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           tasks[index].description,
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: task.isChecked ? Colors.grey : Colors.white,
+                            decoration: task.isChecked
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
                           ),
                         ),
                       ],
