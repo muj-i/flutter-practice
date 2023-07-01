@@ -246,6 +246,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             }
                                             Navigator.pop(context);
                                           },
+                                          style: ButtonStyle(
+                                              elevation:
+                                                  MaterialStateProperty.all(6)),
                                           child: Text('Update Save'),
                                         )
                                       ],
@@ -253,6 +256,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   });
                             },
                             child: Text('Edit task'),
+                            style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(6)),
                           ),
                           SizedBox(width: 8),
                           ElevatedButton(
@@ -261,8 +266,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.pop(context);
                             },
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors
-                                  .redAccent, // Set the desired background color
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.red,
                             ),
                             child: const Text('Delete'),
                           ),
@@ -493,7 +498,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.pop(context);
                         }
                       },
-                      child: Text('Save'),
+                      child: Text('Save task'),
+                      style:
+                          ButtonStyle(elevation: MaterialStateProperty.all(6)),
                     )
                   ],
                 );
