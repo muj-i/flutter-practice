@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:crud/edi.dart';
+import 'package:crud/bottom_sheet.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:crud/product.dart';
 import 'package:flutter/material.dart';
@@ -74,42 +75,51 @@ class _HomeScreenState extends State<HomeScreen> {
           : ListView.separated(
               itemCount: products.length,
               itemBuilder: ((context, index) {
-                return Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onLongPress: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return buildBottomSheetContent(context);
-                        },
-                      );
-                    },
-                    title: Text(products[index].productName),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Product id: ${products[index].id}'),
-                        Text('Product Code: ${products[index].productCode}'),
-                        Text(
-                            'Added Date: ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(products[index].createdDate))}'),
-                      ],
-                    ),
-                    leading: Image.network(
-                      products[index].image,
-                      width: 50,
-                      errorBuilder: (context, error, stackTrace) {
-                        return const Icon(
-                          Icons.photo,
-                          size: 30,
+                return Slidable(
+                  startActionPane:
+                      ActionPane(motion: ScrollMotion(), children: [
+                    SlidableAction(
+                      onPressed: ((context) {}),
+                      icon: Icons.edit,
+                    )
+                  ]),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: ListTile(
+                      onLongPress: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return buildBottomSheetContent(context);
+                          },
                         );
                       },
+                      title: Text(products[index].productName),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Product id: ${products[index].id}'),
+                          Text('Product Code: ${products[index].productCode}'),
+                          Text(
+                              'Added Date: ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(products[index].createdDate))}'),
+                        ],
+                      ),
+                      leading: Image.network(
+                        products[index].image,
+                        width: 50,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(
+                            Icons.photo,
+                            size: 30,
+                          );
+                        },
+                      ),
+                      trailing: Column(children: [
+                        Text('Quantity: ${products[index].quantity}'),
+                        Text('Unit Price: ${products[index].unitPrice}/p'),
+                        Text('Total Price: ${products[index].totalPrice}'),
+                      ]),
                     ),
-                    trailing: Column(children: [
-                      Text('Quantity: ${products[index].quantity}'),
-                      Text('Unit Price: ${products[index].unitPrice}/p'),
-                      Text('Total Price: ${products[index].totalPrice}'),
-                    ]),
                   ),
                 );
               }),
