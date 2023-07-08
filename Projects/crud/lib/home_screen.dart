@@ -39,10 +39,28 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  Future<void> deleteProduct(String productId) async {
+    Response response = await delete(Uri.parse(
+        'https://crud.teamrabbil.com/api/v1/DeleteProduct/$productId'));
+
+    if (response.statusCode == 200) {
+      setState(() {
+        products.removeWhere((product) => product.id == productId);
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Product deleted successfully')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to delete product')),
+      );
+    }
+  }
+
   void refreshProducts() {
     setState(() {
       inProgress = true;
-      //products.clear();
+      products.clear();
     });
     getProducts();
   }
@@ -52,15 +70,23 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
-        title: Text('C R U D'),
+        title: const Text('C R U D'),
         actions: [
           IconButton(
-              onPressed: refreshProducts, icon: Icon(FontAwesomeIcons.plus)),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return buildBottomSheetContent(context);
+                  },
+                );
+              },
+              icon: const Icon(FontAwesomeIcons.plus)),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: IconButton(
                 onPressed: refreshProducts,
-                icon: Icon(FontAwesomeIcons.arrowRotateRight)),
+                icon: const Icon(FontAwesomeIcons.arrowRotateRight)),
           )
         ],
       ),
@@ -77,28 +103,31 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: ((context, index) {
                 return Slidable(
                   startActionPane:
-                      ActionPane(motion: ScrollMotion(), children: [
+                      ActionPane(motion: const ScrollMotion(), children: [
                     SlidableAction(
                       onPressed: ((context) {}),
-                      icon: Icons.edit,
+                      icon: FontAwesomeIcons.penToSquare,
+                      backgroundColor: Colors.green.shade600,
+                    )
+                  ]),
+                  endActionPane:
+                      ActionPane(motion: const ScrollMotion(), children: [
+                    SlidableAction(
+                      onPressed: ((context) {
+                        deleteProduct((products[index].id));
+                      }),
+                      icon: FontAwesomeIcons.trash,
+                      backgroundColor: Colors.red.shade600,
                     )
                   ]),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      onLongPress: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return buildBottomSheetContent(context);
-                          },
-                        );
-                      },
                       title: Text(products[index].productName),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Product id: ${products[index].id}'),
+                          //Text('Product id: ${products[index].id}'),
                           Text('Product Code: ${products[index].productCode}'),
                           Text(
                               'Added Date: ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse(products[index].createdDate))}'),
