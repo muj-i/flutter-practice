@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../API/model.dart';
+import 'recipe.dart';
 
 class RecipeListPage extends StatefulWidget {
   @override
@@ -35,7 +35,7 @@ class _RecipeListPageState extends State<RecipeListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipe List'),
+        title: Text('List of Recipe'),
       ),
       body: ListView.builder(
         itemCount: recipes.length,

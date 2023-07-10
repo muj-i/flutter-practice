@@ -7,9 +7,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Recipe App',
+      title: 'Recipe',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
       home: RecipeListPage(),
     );
@@ -86,17 +86,16 @@ class _RecipeListPageState extends State<RecipeListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipe List'),
+        title: Text('List of Recipe'),
       ),
       body: ListView.builder(
         itemCount: recipes.length,
         itemBuilder: (context, index) {
           return ListTile(
             shape: RoundedRectangleBorder(
-              side: BorderSide(width: 2),
               borderRadius: BorderRadius.circular(10),
             ),
-            leading: Icon(Icons.fastfood),
+            leading: Icon(Icons.food_bank),
             title: Text(recipes[index].title),
             subtitle: Text(recipes[index].description),
           );
