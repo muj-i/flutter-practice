@@ -97,6 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final lastUpdatedTime = DateFormat('h:mm a, MMM dd').format(DateTime.now());
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -122,8 +124,21 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextField(
+                  
                   decoration: InputDecoration(
+                    fillColor: Colors.blueGrey.withAlpha(120),
+                    // decoration: BoxDecoration(
+                    //     color: Colors.blueGrey.withAlpha(120),
+                    //     borderRadius: BorderRadius.circular(30.0),
+                    //   ),
+                    //   padding:
+                    //       EdgeInsets.symmetric(horizontal: 9.0, vertical: 6.5),
                     labelText: 'Enter a location',
+                    border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(30.0),
+
+                    ),
+
                   ),
                   onSubmitted: (value) {
                     fetchWeatherData(value);
@@ -149,17 +164,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        'Temperature: $_temperature°C',
-                        style: TextStyle(fontSize: 18.0),
+                        '$_temperature°C',
+                        style: TextStyle(fontSize: 32.0),
                       ),
                       SizedBox(height: 8.0),
                       Text(
                         'Weather: $_weatherDescription',
-                        style: TextStyle(fontSize: 18.0),
+                        style: TextStyle(fontSize: 22.0),
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        'Last Updated: ${DateFormat.Hm().format(DateTime.now())}',
+                        'Last Updated: $lastUpdatedTime',
                         style: const TextStyle(fontSize: 16.0),
                       ),
                     ],
