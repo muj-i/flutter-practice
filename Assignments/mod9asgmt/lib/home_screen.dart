@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    fetchWeatherData('Seoul'); // Fetch weather data for "Khulna" on app launch
+    fetchWeatherData('Seoul'); 
   }
 
   void fetchWeatherData(String location) async {
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: .75,
+        childAspectRatio: .65,
         
       ),
       itemCount: _recentSearches.length,
@@ -226,6 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text(
             'W E A T H E R !',
           ),
+          centerTitle: true,
         ),
         body: Stack(
           children: [
@@ -233,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: getBackgroundDecoration(context),
             ),
             Container(
-              margin: const EdgeInsets.only(top: kToolbarHeight),
+              margin: const EdgeInsets.only(top: 80),
               padding: const EdgeInsets.all(22),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
