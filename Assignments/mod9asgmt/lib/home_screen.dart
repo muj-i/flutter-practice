@@ -25,6 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
   bool _hasError = false;
   final List<Map<String, String>> _recentSearches = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchWeatherData('Seoul'); // Fetch weather data for "Khulna" on app launch
+  }
 
   void fetchWeatherData(String location) async {
     setState(() {
@@ -88,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget buildRecentSearches() {
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: 1,
       ),
@@ -146,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Image.network(
                             'https://openweathermap.org/img/w/$weatherImage.png',
                           ),
-                          SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                           Text(
                             '$temperature°C',
                             style: const TextStyle(fontSize: 32.0),
@@ -156,7 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 8.0),
                       Text(
                         'Weather: $_weatherDescription',
-                        style: const TextStyle(fontSize: 22.0),
                       ),
                       const SizedBox(height: 8.0),
                       Text(
@@ -196,16 +200,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(location!),
                 Image.network(
                   'https://openweathermap.org/img/w/$weatherImage.png',
-                 
                 ),
-                Text('$temperature°C'),IconButton(
-                onPressed: () {
-                  setState(() {
-                    _recentSearches.removeAt(index);
-                  });
-                },
-                icon: Icon(Icons.delete),
-              ),
+                Text('$temperature°C'),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _recentSearches.removeAt(index);
+                    });
+                  },
+                  icon: const Icon(Icons.delete),
+                ),
               ],
             ),
           ),
@@ -222,27 +226,15 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          title: Text('W E A T H E R !'),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                  onPressed: () {_recentSearches.clear();
-                    for (final search in _recentSearches) {
-                      final location = search['location'];
-                      fetchWeatherData(_location);
-                       
-                    }
-                  },
-                  icon: Icon(Icons.refresh_rounded)),
-            )
-          ],
+          title: const Text(
+            'W E A T H E R !',
+          ),
         ),
         body: Container(
-          padding: EdgeInsets.all(26),
+          padding: const EdgeInsets.all(26),
           decoration: getBackgroundDecoration(context),
           child: Padding(
-            padding: EdgeInsets.all(26.0),
+            padding: const EdgeInsets.all(26.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -261,33 +253,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     fetchWeatherData(value);
                   },
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 if (_isLoading)
-                  CircularProgressIndicator()
+                  const CircularProgressIndicator()
                 else if (_hasError)
-                  Text('Failed to fetch weather data.')
+                  const Text('Failed to fetch weather data.')
                 else if (_location.isNotEmpty)
                   Column(
                     children: [
                       Text(
                         _location,
-                        style: TextStyle(fontSize: 24.0),
+                        style: const TextStyle(fontSize: 24.0),
                       ),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.network(
                             'https://openweathermap.org/img/w/$_weatherImage.png',
                           ),
-                          SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                           Row(
                             children: [
                               Text(
                                 '$_temperature°C',
-                                style: TextStyle(fontSize: 32.0),
+                                style: const TextStyle(fontSize: 32.0),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
                               Column(
@@ -306,14 +298,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                       Text(
                         'Feels Like: $_feelsLike°C,',
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       Text(
                         'Weather: $_weatherDescription',
-                        style: TextStyle(fontSize: 22.0),
+                        style: const TextStyle(fontSize: 22.0),
                       ),
                       Text(
                         'Pressure: $_pressure hPa,',
@@ -325,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   children: [
                     Expanded(
@@ -334,16 +326,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.blueGrey.withAlpha(120),
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 8.0),
-                        child: Text(
+                        child: const Text(
                           'Recent Searches',
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Container(
@@ -351,15 +343,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.blueGrey.withAlpha(120),
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 9.0, vertical: 6.5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 9.0, vertical: 6.5),
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
                             _recentSearches.clear();
                           });
                         },
-                        child: Text('Clear'),
+                        child: const Text('Clear'),
                       ),
                     )
                   ],
