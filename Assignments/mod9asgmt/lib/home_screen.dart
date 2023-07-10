@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -16,9 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   String _temperature = '';
   String _weatherDescription = '';
   String _weatherImage = '';
+  String _temperatureMin = '';
+  String _temperatureMax = '';
+  String _feelsLike = '';
+  String _pressure = '';
+
   bool _isLoading = false;
   bool _hasError = false;
-  List<Map<String, String>> _recentSearches = [];
+  final List<Map<String, String>> _recentSearches = [];
 
   void fetchWeatherData(String location) async {
     setState(() {
@@ -36,20 +42,38 @@ class _HomeScreenState extends State<HomeScreen> {
         final data = json.decode(response.body);
         final main = data['main'];
         final weather = data['weather'][0];
+        final wind = data['wind'];
 
         setState(() {
           _location = data['name'];
           _temperature = (main['temp']).toStringAsFixed(1);
           _weatherDescription = weather['description'];
           _weatherImage = weather['icon'];
+          _temperatureMin = (main['temp_min']).toStringAsFixed(1);
+          _temperatureMax = (main['temp_max']).toStringAsFixed(1);
+          _feelsLike = (main['feels_like']).toStringAsFixed(1);
+          _pressure = main['pressure'].toString();
 
-          _isLoading = false;
+          final humidity = main['humidity'].toString();
+          final visibility = data['visibility'].toString();
+          final windSpeed = wind['speed'].toString();
+          final windDirection = wind['deg'].toString();
 
           _recentSearches.add({
             'location': _location,
             'temperature': _temperature,
             'weatherImage': _weatherImage,
+            'weatherDescription': _weatherDescription,
+            'temperatureMin': _temperatureMin,
+            'temperatureMax': _temperatureMax,
+            'feelsLike': _feelsLike,
+            'pressure': _pressure,
+            'humidity': humidity,
+            'visibility': visibility,
+            'windSpeed': windSpeed,
+            'windDirection': windDirection,
           });
+          _isLoading = false;
         });
       } else {
         throw Exception('Failed to fetch weather data');
@@ -66,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: 1.0,
+        childAspectRatio: 1,
       ),
       itemCount: _recentSearches.length,
       itemBuilder: (context, index) {
@@ -74,21 +98,116 @@ class _HomeScreenState extends State<HomeScreen> {
         final location = searchResult['location'];
         final temperature = searchResult['temperature'];
         final weatherImage = searchResult['weatherImage'];
+        final temperatureMin = searchResult['temperatureMin'];
+        final temperatureMax = searchResult['temperatureMax'];
+        final pressure = searchResult['pressure'];
+        final humidity = searchResult['humidity'];
+        final visibility = searchResult['visibility'];
+        final windSpeed = searchResult['windSpeed'];
+        final windDirection = searchResult['windDirection'];
 
-        return Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(location!),
-              SizedBox(height: 8.0),
-              Image.network(
-                'https://openweathermap.org/img/w/$weatherImage.png',
-                width: 50.0,
-                height: 50.0,
+        return GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                FontAwesomeIcons.circleXmark,
+                                color: Colors.red,
+                              )),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                location,
+                                style: const TextStyle(fontSize: 24.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            'https://openweathermap.org/img/w/$weatherImage.png',
+                          ),
+                          SizedBox(width: 10.0),
+                          Text(
+                            '$temperature°C',
+                            style: const TextStyle(fontSize: 32.0),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        'Weather: $_weatherDescription',
+                        style: const TextStyle(fontSize: 22.0),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        'Temperature Range: $temperatureMin°C - $temperatureMax°C',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                      Text(
+                        'Pressure: $pressure hPa',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                      Text(
+                        'Humidity: $humidity%',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                      Text(
+                        'Visibility: $visibility meters',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                      Text(
+                        'Wind Speed: $windSpeed m/s',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                      Text(
+                        'Wind Direction: $windDirection°',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+          child: Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(location!),
+                Image.network(
+                  'https://openweathermap.org/img/w/$weatherImage.png',
+                 
+                ),
+                Text('$temperature°C'),IconButton(
+                onPressed: () {
+                  setState(() {
+                    _recentSearches.removeAt(index);
+                  });
+                },
+                icon: Icon(Icons.delete),
               ),
-              SizedBox(height: 8.0),
-              Text('$temperature°C'),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -97,7 +216,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final lastUpdatedTime = DateFormat('h:mm a, MMM dd').format(DateTime.now());
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -109,36 +227,35 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
-                  onPressed: () {
-                    //fetchWeatherData();
+                  onPressed: () {_recentSearches.clear();
+                    for (final search in _recentSearches) {
+                      final location = search['location'];
+                      fetchWeatherData(_location);
+                       
+                    }
                   },
                   icon: Icon(Icons.refresh_rounded)),
             )
           ],
         ),
         body: Container(
+          padding: EdgeInsets.all(26),
           decoration: getBackgroundDecoration(context),
           child: Padding(
-            padding: EdgeInsets.all(36.0),
+            padding: EdgeInsets.all(26.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextField(
-                  
                   decoration: InputDecoration(
                     fillColor: Colors.blueGrey.withAlpha(120),
-                    // decoration: BoxDecoration(
-                    //     color: Colors.blueGrey.withAlpha(120),
-                    //     borderRadius: BorderRadius.circular(30.0),
-                    //   ),
-                    //   padding:
-                    //       EdgeInsets.symmetric(horizontal: 9.0, vertical: 6.5),
+                    filled: true,
                     labelText: 'Enter a location',
                     border: OutlineInputBorder(
-borderRadius: BorderRadius.circular(30.0),
-
+                      borderSide:
+                          BorderSide(color: Colors.blueGrey.withAlpha(120)),
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
-
                   ),
                   onSubmitted: (value) {
                     fetchWeatherData(value);
@@ -156,23 +273,52 @@ borderRadius: BorderRadius.circular(30.0),
                         _location,
                         style: TextStyle(fontSize: 24.0),
                       ),
-                      SizedBox(height: 16.0),
-                      Image.network(
-                        'https://openweathermap.org/img/w/$_weatherImage.png',
-                        // width: 200.0,
-                        // height: 200.0,
+                      SizedBox(height: 8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            'https://openweathermap.org/img/w/$_weatherImage.png',
+                          ),
+                          SizedBox(width: 10.0),
+                          Row(
+                            children: [
+                              Text(
+                                '$_temperature°C',
+                                style: TextStyle(fontSize: 32.0),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Max: $_temperatureMax°C',
+                                    style: const TextStyle(fontSize: 16.0),
+                                  ),
+                                  Text(
+                                    'Min: $_temperatureMin°C',
+                                    style: const TextStyle(fontSize: 16.0),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        '$_temperature°C',
-                        style: TextStyle(fontSize: 32.0),
+                        'Feels Like: $_feelsLike°C,',
+                        style: const TextStyle(fontSize: 18.0),
                       ),
-                      SizedBox(height: 8.0),
                       Text(
                         'Weather: $_weatherDescription',
                         style: TextStyle(fontSize: 22.0),
                       ),
-                      SizedBox(height: 8.0),
+                      Text(
+                        'Pressure: $_pressure hPa,',
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
                       Text(
                         'Last Updated: $lastUpdatedTime',
                         style: const TextStyle(fontSize: 16.0),
@@ -218,7 +364,6 @@ borderRadius: BorderRadius.circular(30.0),
                     )
                   ],
                 ),
-                SizedBox(height: 8.0),
                 Expanded(
                   child: buildRecentSearches(),
                 ),
