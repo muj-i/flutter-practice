@@ -3,13 +3,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mod9asgmt/backgroud.dart';
+import 'package:mod9asgmt/background.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+}
+
+DateTime? parseDateTimeFromUnixTimestamp(String timestamp) {
+  try {
+    final intTimestamp = int.parse(timestamp);
+    return DateTime.fromMillisecondsSinceEpoch(intTimestamp * 1000);
+  } catch (e) {
+    print('Error parsing timestamp: $timestamp');
+    return null;
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -33,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    fetchWeatherData('Seoul'); 
+    fetchWeatherData('Seoul');
   }
 
   void fetchWeatherData(String location) async {
@@ -80,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           _isDayTime = now >= sunriseTime && now <= sunsetTime;
 
-
           _recentSearches.add({
             'location': _location,
             'temperature': _temperature,
@@ -94,10 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
             'visibility': visibility,
             'windSpeed': windSpeed,
             'windDirection': windDirection,
-
-
-            'sunRise' : _sunRise,
-            'sunSet' : _sunSet,
+            'sunRise': _sunRise,
+            'sunSet': _sunSet,
           });
           _isLoading = false;
         });
@@ -117,7 +124,6 @@ class _HomeScreenState extends State<HomeScreen> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         childAspectRatio: .65,
-        
       ),
       itemCount: _recentSearches.length,
       itemBuilder: (context, index) {
@@ -146,17 +152,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Align(
-                    alignment: Alignment.topLeft,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.redAccent,
+                        alignment: Alignment.topLeft,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.redAccent,
+                          ),
+                          child: Icon(FontAwesomeIcons.squareXmark),
+                        ),
                       ),
-                      child: Icon(FontAwesomeIcons.squareXmark),
-                    ),
-                  ),
                       Text(
                         location,
                         style: const TextStyle(fontSize: 24.0),
@@ -211,14 +217,15 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
           child: Card(
+            color: Colors.blueGrey.shade50.withAlpha(130),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(location!),
+                Text(location!, style: TextStyle(fontSize: 16),),
                 Image.network(
                   'https://openweathermap.org/img/w/$weatherImage.png',
                 ),
-                Text('$temperature°C'),
+                Text('$temperature°C', style: TextStyle(fontSize: 18),),
                 IconButton(
                   onPressed: () {
                     setState(() {
@@ -238,147 +245,177 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final lastUpdatedTime = DateFormat('h:mm a, MMM dd').format(DateTime.now());
-    return Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: const Text(
-            'W E A T H E R !',
-          ),
-          centerTitle: true,
-        ),
-        body: Stack(
-          children: [
-            Container(
-              decoration: getBackgroundDecoration(_isDayTime),
+    final brightness = _isDayTime ? Brightness.light : Brightness.dark;
+    final theme = ThemeData(
+      brightness: brightness,
+      useMaterial3: true,
+    );
+
+    final sunriseDateTime = parseDateTimeFromUnixTimestamp(_sunRise);
+    final sunsetDateTime = parseDateTimeFromUnixTimestamp(_sunSet);
+
+    final isDay = sunriseDateTime != null &&
+        sunsetDateTime != null &&
+        DateTime.now().isAfter(sunriseDateTime) &&
+        DateTime.now().isBefore(sunsetDateTime);
+
+    return Theme(
+      data: theme,
+      child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: const Text(
+              'W E A T H E R !',
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 80),
-              padding: const EdgeInsets.all(22),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TextField(controller: _locationController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.blueGrey.withAlpha(120),
-                      filled: true,
-                      labelText: 'Enter a location',
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blueGrey.withAlpha(120)),
-                        borderRadius: BorderRadius.circular(16.0),
+            centerTitle: true,
+          ),
+          body: Stack(
+            children: [
+              Container(
+                decoration: getBackgroundDecoration(_isDayTime),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 85),
+                padding: const EdgeInsets.all(22),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextField(
+                      controller: _locationController,
+                      decoration: InputDecoration(
+                        fillColor: Colors.blueGrey.withAlpha(120),
+                        filled: true,
+                        labelText: 'Enter a location',
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.blueGrey.withAlpha(120)),
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
                       ),
-                    ),textInputAction: TextInputAction.search,
-                    onSubmitted: (value) {
-                      fetchWeatherData(value);
-                      setState(() {
-      _locationController.clear();
-    });
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                  if (_isLoading)
-                    const CircularProgressIndicator()
-                  else if (_hasError)
-                    const Text('Failed to fetch weather data. \nEnter valid location or Check your internet connection')
-                  else if (_location.isNotEmpty)
-                    Column(
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (value) {
+                        fetchWeatherData(value);
+                        setState(() {
+                          _locationController.clear();
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16.0),
+                    if (_isLoading)
+                      const CircularProgressIndicator()
+                    else if (_hasError)
+                      const Text(
+                          'Failed to fetch weather data. \nEnter valid location or Check your internet connection')
+                    else if (_location.isNotEmpty)
+                      Column(
+                        children: [
+                          Text(
+                            _location,
+                            style: const TextStyle(fontSize: 24.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://openweathermap.org/img/w/$_weatherImage.png',
+                              ),
+                              const SizedBox(width: 10.0),
+                              Row(
+                                children: [
+                                  Text(
+                                    '$_temperature°C',
+                                    style: const TextStyle(fontSize: 32.0),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Max: $_temperatureMax°C',
+                                        style: const TextStyle(fontSize: 16.0),
+                                      ),
+                                      Text(
+                                        'Min: $_temperatureMin°C',
+                                        style: const TextStyle(fontSize: 16.0),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Feels Like: $_feelsLike°C,',
+                            style: const TextStyle(fontSize: 18.0),
+                          ),
+                          Text(
+                            'Weather: $_weatherDescription',
+                            style: const TextStyle(fontSize: 22.0),
+                          ),
+                          Text(
+                            'Pressure: $_pressure hPa,',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          Text(
+                            'Last Updated: $lastUpdatedTime',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          if (isDay)
+                            Text(
+                              'Currently day in $_location',
+                              style: TextStyle(fontSize: 16.0),
+                            )
+                          else
+                            Text(
+                              'Currently night in $_location',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                        ],
+                      ),
+                    const SizedBox(height: 16.0),
+                    Row(
                       children: [
-                        Text(
-                          _location,
-                          style: const TextStyle(fontSize: 24.0),
-                        ),
-                        const SizedBox(height: 8.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              'https://openweathermap.org/img/w/$_weatherImage.png',
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey.withAlpha(120),
+                              borderRadius: BorderRadius.circular(30),
                             ),
-                            const SizedBox(width: 10.0),
-                            Row(
-                              children: [
-                                Text(
-                                  '$_temperature°C',
-                                  style: const TextStyle(fontSize: 32.0),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Max: $_temperatureMax°C',
-                                      style: const TextStyle(fontSize: 16.0),
-                                    ),
-                                    Text(
-                                      'Min: $_temperatureMin°C',
-                                      style: const TextStyle(fontSize: 16.0),
-                                    ),
-                                  ],
-                                )
-                              ],
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 8.0),
+                            child: const Text(
+                              'Recent Searches',
+                              style: TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold),
                             ),
-                          ],
+                          ),
                         ),
-                        const SizedBox(height: 8.0),
-                        Text(
-                          'Feels Like: $_feelsLike°C,',
-                          style: const TextStyle(fontSize: 18.0),
+                        const SizedBox(
+                          width: 10,
                         ),
-                        Text(
-                          'Weather: $_weatherDescription',
-                          style: const TextStyle(fontSize: 22.0),
-                        ),
-                        Text(
-                          'Pressure: $_pressure hPa,',
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                        Text(
-                          'Last Updated: $lastUpdatedTime',
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _recentSearches.clear();
+                            });
+                          },
+                          child: const Text('Clear'),
+                        )
                       ],
                     ),
-                  const SizedBox(height: 16.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey.withAlpha(120),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 8.0),
-                          child: const Text(
-                            'Recent Searches',
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _recentSearches.clear();
-                          });
-                        },
-                        child: const Text('Clear'),
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    child: buildRecentSearches(),
-                  ),
-                ],
+                    Expanded(
+                      child: buildRecentSearches(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 }
