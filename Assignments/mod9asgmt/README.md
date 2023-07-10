@@ -7,9 +7,11 @@ A flutter project for the assignment of module 9
 
 ## Full app view
 ![Alt Text](assets/screenshots/ss1.png)
+
 ![Alt Text](assets/screenshots/ss2.png)
 
 ![Alt Text](assets/screenshots/ss3.png)
+
 ![Alt Text](assets/screenshots/ss4.png)
 
 
