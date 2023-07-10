@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mod9asgmt/backgroud_widget.dart';
+import 'package:mod9asgmt/backgroud.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController _locationController = TextEditingController();
   String _location = '';
   String _temperature = '';
   String _weatherDescription = '';
@@ -95,7 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: 1,
+        childAspectRatio: .75,
+        
       ),
       itemCount: _recentSearches.length,
       itemBuilder: (context, index) {
@@ -123,26 +125,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(
-                                FontAwesomeIcons.circleXmark,
-                                color: Colors.red,
-                              )),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                location,
-                                style: const TextStyle(fontSize: 24.0),
-                              ),
-                            ),
-                          ),
-                        ],
+                      Align(
+                    alignment: Alignment.topLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.redAccent,
+                      ),
+                      child: Icon(FontAwesomeIcons.squareXmark),
+                    ),
+                  ),
+                      Text(
+                        location,
+                        style: const TextStyle(fontSize: 24.0),
                       ),
                       const SizedBox(height: 8.0),
                       Row(
@@ -230,138 +227,137 @@ class _HomeScreenState extends State<HomeScreen> {
             'W E A T H E R !',
           ),
         ),
-        body: Container(
-          padding: const EdgeInsets.all(26),
-          decoration: getBackgroundDecoration(context),
-          child: Padding(
-            padding: const EdgeInsets.all(26.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextField(
-                  decoration: InputDecoration(
-                    fillColor: Colors.blueGrey.withAlpha(120),
-                    filled: true,
-                    labelText: 'Enter a location',
-                    border: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.blueGrey.withAlpha(120)),
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
+        body: Stack(
+          children: [
+            Container(
+              decoration: getBackgroundDecoration(context),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: kToolbarHeight),
+              padding: const EdgeInsets.all(22),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextField(controller: _locationController,
+                    decoration: InputDecoration(
+                      fillColor: Colors.blueGrey.withAlpha(120),
+                      filled: true,
+                      labelText: 'Enter a location',
+                      border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.blueGrey.withAlpha(120)),
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                    ),textInputAction: TextInputAction.search,
+                    onSubmitted: (value) {
+                      fetchWeatherData(value);
+                      setState(() {
+      _locationController.clear();
+    });
+                    },
                   ),
-                  onSubmitted: (value) {
-                    fetchWeatherData(value);
-                  },
-                ),
-                const SizedBox(height: 16.0),
-                if (_isLoading)
-                  const CircularProgressIndicator()
-                else if (_hasError)
-                  const Text('Failed to fetch weather data.')
-                else if (_location.isNotEmpty)
-                  Column(
+                  const SizedBox(height: 16.0),
+                  if (_isLoading)
+                    const CircularProgressIndicator()
+                  else if (_hasError)
+                    const Text('Failed to fetch weather data. \nEnter valid location or Check your internet connection')
+                  else if (_location.isNotEmpty)
+                    Column(
+                      children: [
+                        Text(
+                          _location,
+                          style: const TextStyle(fontSize: 24.0),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.network(
+                              'https://openweathermap.org/img/w/$_weatherImage.png',
+                            ),
+                            const SizedBox(width: 10.0),
+                            Row(
+                              children: [
+                                Text(
+                                  '$_temperature°C',
+                                  style: const TextStyle(fontSize: 32.0),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Max: $_temperatureMax°C',
+                                      style: const TextStyle(fontSize: 16.0),
+                                    ),
+                                    Text(
+                                      'Min: $_temperatureMin°C',
+                                      style: const TextStyle(fontSize: 16.0),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          'Feels Like: $_feelsLike°C,',
+                          style: const TextStyle(fontSize: 18.0),
+                        ),
+                        Text(
+                          'Weather: $_weatherDescription',
+                          style: const TextStyle(fontSize: 22.0),
+                        ),
+                        Text(
+                          'Pressure: $_pressure hPa,',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                        Text(
+                          'Last Updated: $lastUpdatedTime',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                      ],
+                    ),
+                  const SizedBox(height: 16.0),
+                  Row(
                     children: [
-                      Text(
-                        _location,
-                        style: const TextStyle(fontSize: 24.0),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.network(
-                            'https://openweathermap.org/img/w/$_weatherImage.png',
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey.withAlpha(120),
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          const SizedBox(width: 10.0),
-                          Row(
-                            children: [
-                              Text(
-                                '$_temperature°C',
-                                style: const TextStyle(fontSize: 32.0),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Max: $_temperatureMax°C',
-                                    style: const TextStyle(fontSize: 16.0),
-                                  ),
-                                  Text(
-                                    'Min: $_temperatureMin°C',
-                                    style: const TextStyle(fontSize: 16.0),
-                                  ),
-                                ],
-                              )
-                            ],
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 8.0),
+                          child: const Text(
+                            'Recent Searches',
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        'Feels Like: $_feelsLike°C,',
-                        style: const TextStyle(fontSize: 18.0),
-                      ),
-                      Text(
-                        'Weather: $_weatherDescription',
-                        style: const TextStyle(fontSize: 22.0),
-                      ),
-                      Text(
-                        'Pressure: $_pressure hPa,',
-                        style: const TextStyle(fontSize: 16.0),
-                      ),
-                      Text(
-                        'Last Updated: $lastUpdatedTime',
-                        style: const TextStyle(fontSize: 16.0),
-                      ),
-                    ],
-                  ),
-                const SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey.withAlpha(120),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 8.0),
-                        child: const Text(
-                          'Recent Searches',
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey.withAlpha(120),
-                        borderRadius: BorderRadius.circular(30.0),
+                      const SizedBox(
+                        width: 10,
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 9.0, vertical: 6.5),
-                      child: ElevatedButton(
+                      ElevatedButton(
                         onPressed: () {
                           setState(() {
                             _recentSearches.clear();
                           });
                         },
                         child: const Text('Clear'),
-                      ),
-                    )
-                  ],
-                ),
-                Expanded(
-                  child: buildRecentSearches(),
-                ),
-              ],
+                      )
+                    ],
+                  ),
+                  Expanded(
+                    child: buildRecentSearches(),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ));
   }
 }
