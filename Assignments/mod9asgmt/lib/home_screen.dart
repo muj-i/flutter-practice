@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mod9asgmt/backgroud_widget.dart';
@@ -156,6 +156,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(
                         'Weather: $_weatherDescription',
                         style: TextStyle(fontSize: 18.0),
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(
+                        'Last Updated: ${DateFormat.Hm().format(DateTime.now())}',
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                     ],
                   ),
