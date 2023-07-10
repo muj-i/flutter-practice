@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-BoxDecoration getBackgroundDecoration(bool _isDayTime) {
-  //Brightness currentBrightness = Theme.of(context).brightness;
-  if (_isDayTime) {
+BoxDecoration getBackgroundDecoration(BuildContext context) {
+  Brightness currentBrightness = Theme.of(context).brightness;
+  if (currentBrightness == Brightness.light) {
     return const BoxDecoration(
       image: DecorationImage(
         image: AssetImage(

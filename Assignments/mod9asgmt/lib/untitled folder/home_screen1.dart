@@ -23,10 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _feelsLike = '';
   String _pressure = '';
 
-  String _sunRise = '';
-  String _sunSet = '';
 
-  bool _isDayTime = true;
   bool _isLoading = false;
   bool _hasError = false;
   final List<Map<String, String>> _recentSearches = [];
@@ -54,8 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
         final weather = data['weather'][0];
         final wind = data['wind'];
 
-        final sys = data['sys'];
-
         setState(() {
           _location = data['name'];
           _temperature = (main['temp']).toStringAsFixed(1);
@@ -71,16 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
           final windSpeed = wind['speed'].toString();
           final windDirection = wind['deg'].toString();
 
-          _sunRise = sys['sunrise'].toString();
-          _sunSet = sys['sunset'].toString();
-
-          final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-          final sunriseTime = int.parse(_sunRise);
-          final sunsetTime = int.parse(_sunSet);
-
-          _isDayTime = now >= sunriseTime && now <= sunsetTime;
-
-
           _recentSearches.add({
             'location': _location,
             'temperature': _temperature,
@@ -94,10 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             'visibility': visibility,
             'windSpeed': windSpeed,
             'windDirection': windDirection,
-
-
-            'sunRise' : _sunRise,
-            'sunSet' : _sunSet,
           });
           _isLoading = false;
         });
@@ -251,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Stack(
           children: [
             Container(
-              decoration: getBackgroundDecoration(_isDayTime),
+              decoration: getBackgroundDecoration(context),
             ),
             Container(
               margin: const EdgeInsets.only(top: 80),
