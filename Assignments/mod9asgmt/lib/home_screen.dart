@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _sunRise = '';
   String _sunSet = '';
-
+  String _currentlyText = '';
   bool _isDayTime = true;
   bool _isLoading = false;
   bool _hasError = false;
@@ -141,6 +141,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return GestureDetector(
           onTap: () {
+            final sunriseDateTime =
+                parseDateTimeFromUnixTimestamp(searchResult['sunRise']!);
+            final sunsetDateTime =
+                parseDateTimeFromUnixTimestamp(searchResult['sunSet']!);
+            final isDay = sunriseDateTime != null &&
+                sunsetDateTime != null &&
+                DateTime.now().isAfter(sunriseDateTime) &&
+                DateTime.now().isBefore(sunsetDateTime);
+
+            String currentlyText = '';
+
+            if (isDay) {
+              currentlyText = 'Currently day in $_location';
+            } else {
+              currentlyText = 'Currently night in $_location';
+            }
+
+            setState(() {
+              _location = location;
+              _temperature = temperature!;
+              _weatherImage = weatherImage!;
+              _temperatureMin = temperatureMin!;
+              _temperatureMax = temperatureMax!;
+              _weatherDescription = searchResult['weatherDescription']!;
+              _feelsLike = searchResult['feelsLike']!;
+              _pressure = pressure!;
+              _isDayTime = isDay;
+              _currentlyText = currentlyText;
+            });
+          },
+          onLongPress: () {
             showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
@@ -217,15 +248,23 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
           child: Card(
-            color: Colors.blueGrey.shade50.withAlpha(130),
+            color: _isDayTime
+                ? Colors.white.withAlpha(200)
+                : Colors.black.withAlpha(200),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(location!, style: TextStyle(fontSize: 16),),
+                Text(
+                  location!,
+                  style: TextStyle(fontSize: 16),
+                ),
                 Image.network(
                   'https://openweathermap.org/img/w/$weatherImage.png',
                 ),
-                Text('$temperature°C', style: TextStyle(fontSize: 18),),
+                Text(
+                  '$temperature°C',
+                  style: TextStyle(fontSize: 18),
+                ),
                 IconButton(
                   onPressed: () {
                     setState(() {
@@ -259,6 +298,9 @@ class _HomeScreenState extends State<HomeScreen> {
         DateTime.now().isAfter(sunriseDateTime) &&
         DateTime.now().isBefore(sunsetDateTime);
 
+    final allColor =
+        _isDayTime ? Colors.white.withAlpha(130) : Colors.black.withAlpha(130);
+
     return Theme(
       data: theme,
       child: Scaffold(
@@ -285,13 +327,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     TextField(
                       controller: _locationController,
                       decoration: InputDecoration(
-                        fillColor: Colors.blueGrey.withAlpha(120),
+                        fillColor: allColor,
+                        focusColor: allColor,
                         filled: true,
-                        labelText: 'Enter a location',
+                        labelText: 'Enter location',
+                        alignLabelWithHint: true,
                         border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blueGrey.withAlpha(120)),
-                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: allColor, width: 2.0),
+                          borderRadius: BorderRadius.circular(50.0),
                         ),
                       ),
                       textInputAction: TextInputAction.search,
@@ -365,7 +408,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Last Updated: $lastUpdatedTime',
                             style: const TextStyle(fontSize: 16.0),
                           ),
-                          if (isDay)
+                          if (_isDayTime)
                             Text(
                               'Currently day in $_location',
                               style: TextStyle(fontSize: 16.0),
@@ -383,29 +426,37 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.blueGrey.withAlpha(120),
+                              color: _isDayTime
+                                  ? Colors.white.withAlpha(200)
+                                  : Colors.black.withAlpha(200),
                               borderRadius: BorderRadius.circular(30),
                             ),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15.0, vertical: 8.0),
-                            child: const Text(
-                              'Recent Searches',
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Recent Searches',
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _recentSearches.clear();
+                                        });
+                                      },
+                                      child: const Text('Clear'),
+                                    )
+                                  ]),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _recentSearches.clear();
-                            });
-                          },
-                          child: const Text('Clear'),
-                        )
                       ],
                     ),
                     Expanded(
