@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mod9asgmt/background.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,15 +36,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _sunRise = '';
   String _sunSet = '';
-  String _currentlyText = '';
   bool _isDayTime = true;
   bool _isLoading = false;
   bool _hasError = false;
-  final List<Map<String, String>> _recentSearches = [];
+  List<Map<String, String>> _recentSearches = [];
   @override
   void initState() {
     super.initState();
     fetchWeatherData('Seoul');
+    loadRecentSearches().then((recentSearches) {
+      setState(() {
+        _recentSearches = recentSearches;
+      });
+    });
+  }
+
+  void saveRecentSearches(List<Map<String, String>> recentSearches) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> encodedSearches =
+        recentSearches.map((search) => json.encode(search)).toList();
+    await prefs.setStringList('recentSearches', encodedSearches);
+  }
+
+  Future<List<Map<String, String>>> loadRecentSearches() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? encodedSearches = prefs.getStringList('recentSearches');
+    if (encodedSearches != null) {
+      List<Map<String, String>> recentSearches = encodedSearches
+          .map((search) => json.decode(search) as Map<String, dynamic>)
+          .map((search) =>
+              search.map((key, value) => MapEntry(key, value.toString())))
+          .toList();
+      return recentSearches;
+    }
+    return [];
   }
 
   void fetchWeatherData(String location) async {
@@ -89,7 +115,14 @@ class _HomeScreenState extends State<HomeScreen> {
           final sunsetTime = int.parse(_sunSet);
 
           _isDayTime = now >= sunriseTime && now <= sunsetTime;
+// Check if the location already exists in the recent searches list
+          final existingIndex = _recentSearches.indexWhere(
+              (searchResult) => searchResult['location'] == _location);
 
+          if (existingIndex != -1) {
+            _recentSearches
+                .removeAt(existingIndex); // Remove the existing entry
+          }
           _recentSearches.add({
             'location': _location,
             'temperature': _temperature,
@@ -107,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'sunSet': _sunSet,
           });
           _isLoading = false;
+          saveRecentSearches(_recentSearches);
         });
       } else {
         throw Exception('Failed to fetch weather data');
@@ -150,12 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 DateTime.now().isAfter(sunriseDateTime) &&
                 DateTime.now().isBefore(sunsetDateTime);
 
-            String currentlyText = '';
 
             if (isDay) {
-              currentlyText = 'Currently day in $_location';
             } else {
-              currentlyText = 'Currently night in $_location';
             }
 
             setState(() {
@@ -168,7 +199,6 @@ class _HomeScreenState extends State<HomeScreen> {
               _feelsLike = searchResult['feelsLike']!;
               _pressure = pressure!;
               _isDayTime = isDay;
-              _currentlyText = currentlyText;
             });
           },
           onLongPress: () {
@@ -290,13 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
       useMaterial3: true,
     );
 
-    final sunriseDateTime = parseDateTimeFromUnixTimestamp(_sunRise);
-    final sunsetDateTime = parseDateTimeFromUnixTimestamp(_sunSet);
 
-    final isDay = sunriseDateTime != null &&
-        sunsetDateTime != null &&
-        DateTime.now().isAfter(sunriseDateTime) &&
-        DateTime.now().isBefore(sunsetDateTime);
 
     final allColor =
         _isDayTime ? Colors.white.withAlpha(130) : Colors.black.withAlpha(130);
@@ -330,7 +354,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fillColor: allColor,
                         focusColor: allColor,
                         filled: true,
-                        labelText: 'Enter location',
+                        labelText: 'Enter city name',
                         alignLabelWithHint: true,
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: allColor, width: 2.0),
@@ -349,8 +373,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (_isLoading)
                       const CircularProgressIndicator()
                     else if (_hasError)
-                      const Text(
-                          'Failed to fetch weather data. \nEnter valid location or Check your internet connection')
+                      Column(
+                        children: [
+                          const Text(
+                            'Failed to fetch weather data. \nEnter valid location or Check your internet connection.',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                fetchWeatherData(_location);
+                              },
+                              child: Text('Back'))
+                        ],
+                      )
                     else if (_location.isNotEmpty)
                       Column(
                         children: [
