@@ -6,12 +6,19 @@ A flutter project for the assignment of module 9
 
 
 ## Full app view
+The app is launched with Seoul weather information. Because current location via GPS is not enabled right now.
 ![Alt Text](assets/screenshots/ss1.png)
 
+
+It changes the background according to the sunset and sunrise of the current location.
 ![Alt Text](assets/screenshots/ss2.png)
 
+
+A long press on the card shows a bottom sheet with some additional information of the location.
 ![Alt Text](assets/screenshots/ss3.png)
 
+
+Any incorrect city name name input shows an error message and there's a back button to navigate to previous weather data
 ![Alt Text](assets/screenshots/ss4.png)
 
 
