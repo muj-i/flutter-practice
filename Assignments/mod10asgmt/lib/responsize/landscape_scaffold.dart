@@ -17,10 +17,14 @@ class _LandscapeScaffoldState extends State<LandscapeScaffold> {
       appBar: myAppBar,
       backgroundColor: myBackGroundColor,
       
-      body: Row(
-        children: const [
+      body: const Row(
+        children: [
           MyCircleAvatar(),
-          MyContainer()
+          Column(
+            children: [
+              MyContainer(),
+            ],
+          )
         ],
       ),
     );

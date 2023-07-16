@@ -5,8 +5,8 @@ class ResponsiveLayout extends StatelessWidget {
   final Widget landscapeScaffold;
   
 
-  ResponsiveLayout(
-      {required this.portraitScaffold,
+  const ResponsiveLayout(
+      {super.key, required this.portraitScaffold,
       required this.landscapeScaffold});
 
   @override

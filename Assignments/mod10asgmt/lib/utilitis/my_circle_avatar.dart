@@ -5,10 +5,22 @@ class MyCircleAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
       child: 
-      CircleAvatar()
+      Column(
+        children: [
+          Center(
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/pc.png'),
+              radius: 150,
+            ),
+            
+          ),
+          Text('MPG Trident AS')
+        ],
+      ),
+    
     );
   }
 }

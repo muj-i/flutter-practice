@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: ResponsiveLayout(
-       portraitScaffold: const PortraitScaffold(),
-        landscapeScaffold: const LandscapeScaffold(),
+       portraitScaffold: PortraitScaffold(),
+        landscapeScaffold: LandscapeScaffold(),
         
       ),
     );
