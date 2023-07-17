@@ -7,6 +7,8 @@ A flutter project for the assignment of module 10
 
 ## Full app view
 Portrait mode
+
+
 ![Alt Text](assets/screenshots/ss1.png)
 
 
