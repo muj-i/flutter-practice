@@ -16,5 +16,6 @@ Landscape mode
 
 
 The press function on the image shows a bottom sheet with some additional information about the items.
+
 ![Alt Text](assets/screenshots/ss3.png)
 ![Alt Text](assets/screenshots/ss4.png)
