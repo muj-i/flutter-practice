@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class ContainerItems extends StatelessWidget {
   final String imageLocation;
   final String labelText;
+  final VoidCallback? onTap;
 
-  const ContainerItems({super.key, 
+  const ContainerItems({Key? key, 
     required this.imageLocation,
-    required this.labelText,
+    required this.labelText,this.onTap,
   });
 
   @override
@@ -21,6 +22,7 @@ class ContainerItems extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           child: InkWell(
             borderRadius: BorderRadius.circular(5),
+             onTap: onTap ?? () {},
             child: Stack(
               fit: StackFit.expand,
               children: [

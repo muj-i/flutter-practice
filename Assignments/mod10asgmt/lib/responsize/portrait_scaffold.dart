@@ -18,11 +18,21 @@ class _PortraitScaffoldState extends State<PortraitScaffold> {
       appBar: myAppBar,
       backgroundColor: myBackGroundColor,
       
-      body: const Column(
+      body:  Column(
         children: [
-         MyCircleAvatar(),
+          SizedBox(height: 10),
+         Container(
           
-          MyContainer()
+          child: const MyCircleAvatar(height: 150.0, width: 2000.0,),
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              Expanded(
+                child: MyContainer(),
+              ),
+            ], ),
+        ),
         ],
       ),
     );

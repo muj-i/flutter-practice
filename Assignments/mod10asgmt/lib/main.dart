@@ -1,4 +1,3 @@
-
 import 'package:mod10asgmt/responsize/portrait_scaffold.dart';
 import 'package:mod10asgmt/responsize/responsive_layout.dart';
 import 'package:mod10asgmt/responsize/landscape_scaffold.dart';
@@ -13,14 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: ResponsiveLayout(
-       portraitScaffold: PortraitScaffold(),
+        portraitScaffold: PortraitScaffold(),
         landscapeScaffold: LandscapeScaffold(),
-        
-      ),
+      ),theme: ThemeData(
+        brightness: Brightness.dark,
+      
+        useMaterial3: true
+        ),
+      
     );
   }
 }
