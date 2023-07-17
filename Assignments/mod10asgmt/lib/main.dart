@@ -12,18 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp(
+      title: 'TRIDENT SERIES',
       debugShowCheckedModeBanner: false,
-      home: ResponsiveLayout(
+      home: const ResponsiveLayout(
         portraitScaffold: PortraitScaffold(),
         landscapeScaffold: LandscapeScaffold(),
-      ),theme: ThemeData(
-        brightness: Brightness.dark,
-      
-        useMaterial3: true
-        ),
-      
+      ),
+      theme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
     );
   }
 }

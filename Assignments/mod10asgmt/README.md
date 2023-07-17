@@ -1,16 +1,19 @@
 # mod10asgmt
 
-A new Flutter project.
+A flutter project for the assignment of module 10
 
-## Getting Started
+## R E S P O N S I V E  A P P
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Full app view
+Portrait mode
+![Alt Text](assets/screenshots/ss1.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Landscape mode
+![Alt Text](assets/screenshots/ss2.png)
+
+
+The press function on the image shows a bottom sheet with some additional information about the items.
+![Alt Text](assets/screenshots/ss3.png)
+![Alt Text](assets/screenshots/ss4.png)

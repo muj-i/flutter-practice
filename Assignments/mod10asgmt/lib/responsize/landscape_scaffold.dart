@@ -16,16 +16,19 @@ class _LandscapeScaffoldState extends State<LandscapeScaffold> {
     return Scaffold(
       appBar: myAppBar,
       backgroundColor: myBackGroundColor,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
+      body: const Padding(
+        padding: EdgeInsets.only(top: 10),
         child: Row(
           children: [
-            SizedBox(width: 24.5,),
+            SizedBox(
+              width: 24.5,
+            ),
             Align(
-                alignment: Alignment.center, 
-                child: const MyCircleAvatar(height: 230.0, width: 250.0,)
-                ),
-                
+                alignment: Alignment.center,
+                child: MyCircleAvatar(
+                  height: 230.0,
+                  width: 250.0,
+                )),
             Expanded(
               child: Column(
                 children: [

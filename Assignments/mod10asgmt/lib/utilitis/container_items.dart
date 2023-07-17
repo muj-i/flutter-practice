@@ -5,9 +5,11 @@ class ContainerItems extends StatelessWidget {
   final String labelText;
   final VoidCallback? onTap;
 
-  const ContainerItems({Key? key, 
+  const ContainerItems({
+    super.key,
     required this.imageLocation,
-    required this.labelText,this.onTap,
+    required this.labelText,
+    this.onTap,
   });
 
   @override
@@ -19,23 +21,27 @@ class ContainerItems extends StatelessWidget {
         width: 120.0,
         child: Material(
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(20),
           child: InkWell(
-            borderRadius: BorderRadius.circular(5),
-             onTap: onTap ?? () {},
+            borderRadius: BorderRadius.circular(20),
+            onTap: onTap ?? () {},
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  imageLocation,
-                  fit: BoxFit.fill,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    imageLocation,
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     decoration: BoxDecoration(
-                      color: Colors.blueGrey.withAlpha(150),
+                      color:
+                          const Color.fromARGB(255, 37, 35, 42).withAlpha(150),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
