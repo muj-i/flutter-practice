@@ -1,5 +1,5 @@
 # mod5asgmt
-![Alt Text](lib/screenshot/screenshot.pdf)
+![Alt Text](lib/Screenshot/Screenshots.pdf)
 A flutter project for the assignment of module 5
 
 ## Getting Started
