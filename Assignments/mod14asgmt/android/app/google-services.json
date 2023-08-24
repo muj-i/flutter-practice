@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "463703495790",
+    "project_id": "mod14asgmt-97e3e",
+    "storage_bucket": "mod14asgmt-97e3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463703495790:android:fca5d1a19b79f7e410827f",
+        "android_client_info": {
+          "package_name": "com.muj.mod14asgmt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463703495790-8nvbk46crfj52b7p530r8q32trk6o32o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH_6aZUxH0JGxtogOK6eck1N8t9MsCAfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463703495790-8nvbk46crfj52b7p530r8q32trk6o32o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
