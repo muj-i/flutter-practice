@@ -35,9 +35,8 @@ The "Live tests" folder contains Flutter projects that were designed for live co
 Projects in this folder:
 1. Live Test Project 1: Brief description or theme.
 2. Live Test Project 2: Brief description or theme.
-<a href="https://www.linkedin.com/in/mujahedul-islam-2b3527277/">
-    
-</a>
+<a href="https://www.linkedin.com/in/mujahedul-islam-2b3527277/">Visit my LinkedIn profile</a>
+
 
 
 ## How to Use
