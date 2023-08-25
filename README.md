@@ -36,8 +36,7 @@ Projects in this folder:
 1. Live Test Project 1: Brief description or theme.
 2. Live Test Project 2: Brief description or theme.
 <a href="https://www.linkedin.com/in/mujahedul-islam-2b3527277/">
-    <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />
-</a>
+
 
 ## How to Use
 
