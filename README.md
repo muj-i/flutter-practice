@@ -13,18 +13,41 @@ Welcome to my Flutter Practice Repository! This repository contains a collection
 The "Assignments" folder contains Flutter projects that I've worked on as part of assignments and exercises provided on the Ostad platform. These projects focus on specific concepts and skills, helping me to solidify my understanding of Flutter development.
 
 Projects in this folder:
-1. Assignment Project 1: <img align="center" alt="GIF" src="Assignments/AssignmentsSS/mod5.png" width="900" height="300" />
-2. Assignment Project 2: Brief description or key concepts.
-3. ...
+1. Assignment Project 1 Module 5:
+![Alt Text](Assignments/AssignmentsSS/m5.png)
+2. Assignment Project 2 Module 6:
+![Alt Text](Assignments/AssignmentsSS/m6.png)
+3. Assignment Project 3 Module 7:
+![Alt Text](Assignments/AssignmentsSS/m7.png)
+4. Assignment Project 4 Module 8:
+![Alt Text](Assignments/AssignmentsSS/m8.png)
+5. Assignment Project 5 Module 9:
+![Alt Text](Assignments/AssignmentsSS/m9.png)
+6. Assignment Project 6 Module 10:
+![Alt Text](Assignments/AssignmentsSS/m10.png)
+7. Assignment Project 7 Module 14:
+![Alt Text](Assignments/AssignmentsSS/m14.png)
 
 ### Live Test
 
 The "Live tests" folder contains Flutter projects that were designed for live coding tests and assessments on the Ostad platform. These projects simulate real-world scenarios and challenge my problem-solving skills in a timed environment.
 
 Projects in this folder:
-1. Live Test Project 1: Brief description or theme.
-2. Live Test Project 2: Brief description or theme.
-3. ...
+1. Live Test Project 1:
+<a href="https://github.com/muj-i/Flutter-Practice/tree/main/LiveTests/mod5lt">Module 5 Live Test</a>
+2. Live Test Project 2:
+<a href="https://github.com/muj-i/Flutter-Practice/tree/main/LiveTests/mod6lt">Module 6 Live Test</a>
+3. Live Test Project 3:
+<a href="https://github.com/muj-i/Flutter-Practice/tree/main/LiveTests/mod7lt">Module 7 Live Test</a>
+4. Live Test Project 4:
+<a href="https://github.com/muj-i/Flutter-Practice/tree/main/LiveTests/mod8lt">Module 8 Live Test</a>
+5. Live Test Project 5:
+<a href="https://github.com/muj-i/Flutter-Practice/tree/main/LiveTests/mod9lt">Module 9 Live Test</a>
+6. Live Test Project 6:
+<a href="https://github.com/muj-i/Flutter-Practice/tree/main/LiveTests/mod10lt">Module 10 Live Test</a>
+
+
+
 
 ## How to Use
 
