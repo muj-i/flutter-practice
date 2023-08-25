@@ -1,6 +1,9 @@
 # mod5lt
 
-A new Flutter project for module 5 live test
+A new Flutter project.
+
+![Alt Text](assets/ss1.png)
+![Alt Text](assets/ss2.png)
 
 ## Getting Started
 
