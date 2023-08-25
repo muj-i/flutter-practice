@@ -13,19 +13,19 @@ Welcome to my Flutter Practice Repository! This repository contains a collection
 The "Assignments" folder contains Flutter projects that I've worked on as part of assignments and exercises provided on the Ostad platform. These projects focus on specific concepts and skills, helping me to solidify my understanding of Flutter development.
 
 Projects in this folder:
-1. Assignment Project 1:
+1. Assignment Project 1 Module 5:
 ![Alt Text](Assignments/AssignmentsSS/m5.png)
-2. Assignment Project 2:
+2. Assignment Project 2 Module 6:
 ![Alt Text](Assignments/AssignmentsSS/m6.png)
-3. Assignment Project 3:
+3. Assignment Project 3 Module 7:
 ![Alt Text](Assignments/AssignmentsSS/m7.png)
-4. Assignment Project 4:
+4. Assignment Project 4 Module 8:
 ![Alt Text](Assignments/AssignmentsSS/m8.png)
-5. Assignment Project 5:
+5. Assignment Project 5 Module 9:
 ![Alt Text](Assignments/AssignmentsSS/m9.png)
-6. Assignment Project 6:
+6. Assignment Project 6 Module 10:
 ![Alt Text](Assignments/AssignmentsSS/m10.png)
-7. Assignment Project 7:
+7. Assignment Project 7 Module 14:
 ![Alt Text](Assignments/AssignmentsSS/m14.png)
 
 ### Live Test
@@ -35,7 +35,9 @@ The "Live tests" folder contains Flutter projects that were designed for live co
 Projects in this folder:
 1. Live Test Project 1: Brief description or theme.
 2. Live Test Project 2: Brief description or theme.
-3. ...
+<a href="https://www.linkedin.com/in/mujahedul-islam-2b3527277/">
+    <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
 
 ## How to Use
 
