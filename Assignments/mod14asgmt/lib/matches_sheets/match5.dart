@@ -10,7 +10,8 @@ class FootballMatch5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(25), topRight: Radius.circular(25)),
       child: Container(
         height: 370,
         color: Colors.grey[100],
@@ -45,8 +46,10 @@ class FootballMatch5 extends StatelessWidget {
                         )),
                     const Text(
                       'Match Name',
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                     CupertinoButton(
                       onPressed: () {
@@ -63,7 +66,9 @@ class FootballMatch5 extends StatelessWidget {
                 Text(
                   score.get('match_name'),
                   style: const TextStyle(
-                      fontSize: 32, fontWeight: FontWeight.bold),
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                 ),
                 const SizedBox(
                   height: 12,
@@ -81,7 +86,9 @@ class FootballMatch5 extends StatelessWidget {
                           children: [
                             const Text('Score',
                                 style: TextStyle(
-                                    fontSize: 28, fontWeight: FontWeight.w600)),
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black)),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -89,7 +96,8 @@ class FootballMatch5 extends StatelessWidget {
                                   score.get('team_a_goal').toString(),
                                   style: const TextStyle(
                                       fontSize: 28,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 16,
@@ -97,7 +105,8 @@ class FootballMatch5 extends StatelessWidget {
                                 const Text(':',
                                     style: TextStyle(
                                         fontSize: 30,
-                                        fontWeight: FontWeight.w600)),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
                                 const SizedBox(
                                   width: 16,
                                 ),
@@ -105,7 +114,8 @@ class FootballMatch5 extends StatelessWidget {
                                   score.get('team_b_goal').toString(),
                                   style: const TextStyle(
                                       fontSize: 28,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
                                 ),
                               ],
                             ),
@@ -115,11 +125,13 @@ class FootballMatch5 extends StatelessWidget {
                                 const Text('Time: ',
                                     style: TextStyle(
                                         fontSize: 26,
-                                        fontWeight: FontWeight.w600)),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
                                 Text(score.get('time'),
                                     style: const TextStyle(
                                         fontSize: 26,
-                                        fontWeight: FontWeight.w600)),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
                               ],
                             ),
                             Row(
@@ -128,11 +140,13 @@ class FootballMatch5 extends StatelessWidget {
                                 const Text('Total time: ',
                                     style: TextStyle(
                                         fontSize: 26,
-                                        fontWeight: FontWeight.w600)),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
                                 Text(score.get('total_time'),
                                     style: const TextStyle(
                                         fontSize: 26,
-                                        fontWeight: FontWeight.w600)),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)),
                               ],
                             ),
                           ],

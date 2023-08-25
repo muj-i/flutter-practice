@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
+      debugShowCheckedModeBanner: false,
       home: const HomePage(title: 'FOOTBAL MATCHES'),
     );
   }

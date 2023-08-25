@@ -38,6 +38,20 @@ dependencies:
   firebase_core: ^2.15.1
   cloud_firestore: ^4.9.0
   font_awesome_flutter: ^10.5.0
+  flutter_launcher_icons: ^0.13.1 #icon generate command: flutter pub run flutter_launcher_icons
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/logo/logo.png"
+  web:
+    generate: true
+    image_path: "assets/logo/logo.png"
+  macos:
+    generate: true
+    image_path: "assets/logo/logo.png"
+    icon_size: 48
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +76,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/logo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
