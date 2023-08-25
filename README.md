@@ -14,9 +14,19 @@ The "Assignments" folder contains Flutter projects that I've worked on as part o
 
 Projects in this folder:
 1. Assignment Project 1:
+![Alt Text](Assignments/AssignmentsSS/m5.png)
+2. Assignment Project 2:
 ![Alt Text](Assignments/AssignmentsSS/m6.png)
-3. Assignment Project 2: Brief description or key concepts.
-4. ...
+3. Assignment Project 3:
+![Alt Text](Assignments/AssignmentsSS/m7.png)
+4. Assignment Project 4:
+![Alt Text](Assignments/AssignmentsSS/m8.png)
+5. Assignment Project 5:
+![Alt Text](Assignments/AssignmentsSS/m9.png)
+6. Assignment Project 6:
+![Alt Text](Assignments/AssignmentsSS/m10.png)
+7. Assignment Project 7:
+![Alt Text](Assignments/AssignmentsSS/m14.png)
 
 ### Live Test
 
