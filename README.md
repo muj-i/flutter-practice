@@ -13,9 +13,10 @@ Welcome to my Flutter Practice Repository! This repository contains a collection
 The "Assignments" folder contains Flutter projects that I've worked on as part of assignments and exercises provided on the Ostad platform. These projects focus on specific concepts and skills, helping me to solidify my understanding of Flutter development.
 
 Projects in this folder:
-1. Assignment Project 1: ![Alt Text](Assignments/AssignmentsSS/mod5.png)
-2. Assignment Project 2: Brief description or key concepts.
-3. ...
+1. Assignment Project 1:
+![Alt Text](Assignments/AssignmentsSS/mod5.png)
+3. Assignment Project 2: Brief description or key concepts.
+4. ...
 
 ### Live Test
 
