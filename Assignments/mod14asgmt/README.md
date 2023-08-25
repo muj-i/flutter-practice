@@ -1,6 +1,6 @@
 # mod14asgmt
 
-## Football Match List App
+## Football Matches App
 The Football Matches App is a simple Flutter application that allows users to view a list of football matches. The app fetches match data from a Firebase Cloud Firestore and displays it in a user-friendly interface.
 
 ## App Preview
