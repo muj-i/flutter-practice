@@ -4,7 +4,7 @@ Welcome to my Flutter Practice Repository! This repository contains a collection
 
 ## About Ostad Learning Platform
 
-[Ostad](https://www.ostadapp.com/) is a learning platform that provides high-quality educational content and resources for mastering various skills, including Flutter app development.
+[Ostad](https://ostad.app) is a learning platform that provides high-quality educational content and resources for mastering various skills, including Flutter app development.
 
 ## Folder Structure
 
