@@ -1,0 +1,12 @@
+com.mod5asgmt.muj.mod5asgmt.app-jetified-window-1.0.0-beta04-0 /Users/muj/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/res
+com.mod5asgmt.muj.mod5asgmt.app-jetified-annotation-experimental-1.1.0-1 /Users/muj/.gradle/caches/transforms-3/6c0c163cc77ae6c91f9f7dfcd179c29c/transformed/jetified-annotation-experimental-1.1.0/res
+com.mod5asgmt.muj.mod5asgmt.app-core-1.6.0-2 /Users/muj/.gradle/caches/transforms-3/7e9df2ac2213a6bd3cef0f2f27870d79/transformed/core-1.6.0/res
+com.mod5asgmt.muj.mod5asgmt.app-jetified-window-java-1.0.0-beta04-3 /Users/muj/.gradle/caches/transforms-3/ae81e06d24c799147c26814497a2a305/transformed/jetified-window-java-1.0.0-beta04/res
+com.mod5asgmt.muj.mod5asgmt.app-debug-4 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/android/app/src/debug/res
+com.mod5asgmt.muj.mod5asgmt.app-main-5 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/android/app/src/main/res
+com.mod5asgmt.muj.mod5asgmt.app-pngs-6 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/build/app/generated/res/pngs/debug
+com.mod5asgmt.muj.mod5asgmt.app-resValues-7 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/build/app/generated/res/resValues/debug
+com.mod5asgmt.muj.mod5asgmt.app-rs-8 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/build/app/generated/res/rs/debug
+com.mod5asgmt.muj.mod5asgmt.app-mergeDebugResources-9 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.mod5asgmt.muj.mod5asgmt.app-mergeDebugResources-10 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.mod5asgmt.muj.mod5asgmt.app-merged_res-11 /Volumes/HDD-Z/dxProgramming/Flutter-Practice/Assignments/mod5asgmt/build/app/intermediates/merged_res/debug
