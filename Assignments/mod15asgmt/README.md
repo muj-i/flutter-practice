@@ -5,13 +5,22 @@ A Map App with Google Maps and Flutter
 
 ## App View
 
+
+# Seaking for Location Permissions
+
 ![Alt Text](assets/screenshots/ss1.png)
 ![Alt Text](assets/screenshots/ss7.png)
+
+# Automatic Map Animation
 ![Alt Text](assets/screenshots/ss8.png)
 ![Alt Text](assets/screenshots/ss2.png)
 ![Alt Text](assets/screenshots/ss3.png)
+
+# Real-Time Location Updates & Polyline Tracking
 ![Alt Text](assets/screenshots/ss5.png)
 ![Alt Text](assets/screenshots/ss6.png)
+
+# Marker Information Window
 ![Alt Text](assets/screenshots/ss4.png)
 
 
