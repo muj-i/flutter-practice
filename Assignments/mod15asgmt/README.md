@@ -1,6 +1,6 @@
 # mod15asgmt
 
-# A## Real-Time Location Tracking App with Google Maps and Flutter
+# A Real-Time Location Tracking App with Google Maps and Flutter
 
 
 ## App View
