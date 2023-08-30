@@ -131,9 +131,9 @@ class _MapPageState extends State<MapPage> {
                   circleId: const CircleId('current_location_CI'),
                   radius: 3,
                   center: currentLocation,
-                  strokeColor: Colors.deepPurple.shade400,
+                  strokeColor: Colors.blue.shade400,
                   strokeWidth: 3,
-                  fillColor: Colors.deepPurple.withAlpha(50)),
+                  fillColor: Colors.blue.withAlpha(50)),
             },
             initialCameraPosition: CameraPosition(
               zoom: 17,

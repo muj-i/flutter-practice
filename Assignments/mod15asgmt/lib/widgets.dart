@@ -16,7 +16,7 @@ class CustomDialogBox {
             style: TextStyle(fontSize: 20),
           ),
           content: const Text(
-            'Please turn on location permissions in the settings.\nPermissions > Location > Allow',
+            'Please turn on location permissions in the app settings.\nPermissions > Location > Allow',
             style: TextStyle(fontSize: 16),
           ),
           actions: [
