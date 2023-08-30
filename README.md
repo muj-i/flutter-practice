@@ -27,6 +27,8 @@ Projects in this folder:
 ![Alt Text](Assignments/AssignmentsSS/m10.png)
 7. Assignment Project 7 Module 14:
 ![Alt Text](Assignments/AssignmentsSS/m14.png)
+8. Assignment Project 8 Module 15:
+![Alt Text](Assignments/AssignmentsSS/m15.png)
 
 ### Live Test
 
