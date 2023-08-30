@@ -1,6 +1,16 @@
 # mod15asgmt
 
-A new Flutter project.
+A Map App with Google Maps and Flutter
+
+
+## App View
+
+![Alt Text](assets/screenshots/ss0.png)
+![Alt Text](assets/screenshots/ss1.png)
+![Alt Text](assets/screenshots/ss2.png)
+![Alt Text](assets/screenshots/ss3.png)
+![Alt Text](assets/screenshots/ss4.png)
+
 
 ## Getting Started
 
