@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:mod15asgmt/widgets.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({
@@ -16,32 +17,27 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   bool isLoading = true;
- GoogleMapController? _mapController;
+  GoogleMapController? _mapController;
   LatLng currentLocation = const LatLng(37.334920012221, -122.00899116870059);
   StreamSubscription? _locationSubscription;
   List<LatLng> polylinePoints = [];
 
   @override
   void initState() {
-    initialize();
-    getCurrentLocation();
+    initialCurrentLocation();
 
     super.initState();
   }
 
-  void initialize() {
-    Location.instance
-        .changeSettings(interval: 20000, accuracy: LocationAccuracy.high);
-  }
-
-  void getCurrentLocation() async {
-    await Location.instance.requestPermission();
+  void initialCurrentLocation() async {
+   
     try {
       LocationData? locationData;
-      //await Location.instance.requestPermission();
+   
       locationData = await Location.instance.getLocation();
-      realTimeLocation();
-      //await Future.delayed(const Duration(seconds: 1));
+      await Location.instance
+          .changeSettings(interval: 10000, accuracy: LocationAccuracy.high);
+      
       setState(() {
         currentLocation = LatLng(
           locationData!.latitude!,
@@ -56,7 +52,14 @@ class _MapPageState extends State<MapPage> {
       );
     } catch (e) {
       if (mounted) {
-        _showDialog(context);
+        CustomDialogBox.show(context, () {
+          
+      CustomSnackbar.show(context, 'Navigating to current location');
+    
+          initialCurrentLocation();
+          Navigator.pop(context);
+
+        });
       }
       log("Error getting location: $e");
       setState(() {
@@ -65,7 +68,7 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
-  void realTimeLocation() {
+  Future<void> realTimeLocation() async {
     _locationSubscription =
         Location.instance.onLocationChanged.listen((realTimeLocation) {
       setState(() {
@@ -78,18 +81,25 @@ class _MapPageState extends State<MapPage> {
       _mapController?.animateCamera(
         CameraUpdate.newLatLng(currentLocation),
       );
+
       log('Real time: $realTimeLocation');
     });
+    if (mounted) {
+      CustomSnackbar.show(context, 'Real time location started');
+    }
   }
 
   void realTimeLocationSubscription() {
     _locationSubscription?.cancel();
+    if (mounted) {
+      CustomSnackbar.show(context, 'Real time location ended');
+    }
   }
 
   Set<Polyline> createPolylines() {
     final polyline = Polyline(
       polylineId: const PolylineId('current_location_PL'),
-      color: Colors.deepPurple.shade400,
+      color: Colors.green.shade500,
       points: polylinePoints,
     );
 
@@ -100,7 +110,7 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple[100],
+        backgroundColor: Colors.green[100],
         title: const Text(
           'Real-Time Location Tracker',
           style: TextStyle(fontSize: 20),
@@ -109,9 +119,6 @@ class _MapPageState extends State<MapPage> {
       body: Stack(
         children: [
           GoogleMap(
-            //myLocationEnabled: true,
-            //myLocationButtonEnabled: true,
-
             markers: <Marker>{
               Marker(
                 markerId: const MarkerId('current_location'),
@@ -156,7 +163,7 @@ class _MapPageState extends State<MapPage> {
                   FloatingActionButton(
                     mini: true,
                     onPressed: () {
-                      getCurrentLocation();
+                      initialCurrentLocation();
                     },
                     child: const Icon(Icons.my_location_rounded),
                   ),
@@ -188,27 +195,4 @@ class _MapPageState extends State<MapPage> {
     _locationSubscription?.cancel();
     super.dispose();
   }
-}
-
-void _showDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        content: const Text(
-          'Locattion permission denied\nPlease turn on location permissions',
-          style: TextStyle(fontSize: 16),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Close'),
-          ),
-        ],
-      );
-    },
-  );
 }

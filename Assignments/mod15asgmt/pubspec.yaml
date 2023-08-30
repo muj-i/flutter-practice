@@ -38,6 +38,7 @@ dependencies:
   google_maps_flutter: ^2.4.0
   location: ^5.0.3
   flutter_launcher_icons: ^0.13.1 #icon generate command: flutter pub run flutter_launcher_icons
+  app_settings: ^5.0.0
 
 flutter_launcher_icons:
   android: true
