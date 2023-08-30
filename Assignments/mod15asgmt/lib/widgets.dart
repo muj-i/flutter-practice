@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class CustomDialogBox {
   static void show(
-    BuildContext context, VoidCallback onPressed,
+    BuildContext context,
+    VoidCallback onPressed,
   ) {
     showDialog(
       context: context,
@@ -18,7 +19,8 @@ class CustomDialogBox {
             'Please turn on location permissions in the settings.\nPermissions > Location > Allow',
             style: TextStyle(fontSize: 16),
           ),
-          actions: [TextButton(
+          actions: [
+            TextButton(
               onPressed: onPressed,
               child: const Text('Close'),
             ),
@@ -28,7 +30,6 @@ class CustomDialogBox {
               },
               child: const Text('Open App Settings'),
             ),
-            
           ],
         );
       },

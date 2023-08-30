@@ -30,14 +30,13 @@ class _MapPageState extends State<MapPage> {
   }
 
   void initialCurrentLocation() async {
-   
     try {
       LocationData? locationData;
-   
+
       locationData = await Location.instance.getLocation();
       await Location.instance
           .changeSettings(interval: 10000, accuracy: LocationAccuracy.high);
-      
+
       setState(() {
         currentLocation = LatLng(
           locationData!.latitude!,
@@ -53,12 +52,10 @@ class _MapPageState extends State<MapPage> {
     } catch (e) {
       if (mounted) {
         CustomDialogBox.show(context, () {
-          
-      CustomSnackbar.show(context, 'Navigating to current location');
-    
+          CustomSnackbar.show(context, 'Navigating to current location');
+
           initialCurrentLocation();
           Navigator.pop(context);
-
         });
       }
       log("Error getting location: $e");

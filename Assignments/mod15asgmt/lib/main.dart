@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mod15asgmt/map_page.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
