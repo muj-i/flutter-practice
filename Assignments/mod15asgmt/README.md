@@ -1,12 +1,12 @@
 # mod15asgmt
 
-A Map App with Google Maps and Flutter
+# A## Real-Time Location Tracking App with Google Maps and Flutter
 
 
 ## App View
 
 
-# Seaking for Location Permissions
+# Seaking for Location Permission
 
 ![Alt Text](assets/screenshots/ss1.png)
 ![Alt Text](assets/screenshots/ss7.png)
@@ -25,15 +25,27 @@ A Map App with Google Maps and Flutter
 
 
 
-## Getting Started
+## Real-Time Location Tracking App
+This is a Flutter app that demonstrates real-time location tracking on a Google Map. The app displays the user's current location on the map, updates the location marker every 10 seconds, draws a polyline to show the path, and provides additional details about the location through an info window.
 
-This project is a starting point for a Flutter application.
+Features
+1. Automatic Map Animation:
 
-A few resources to get you started if this is your first Flutter project:
+The Google Map view smoothly animates to the user's current location upon opening the app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Real-Time Location Updates:
+
+The app fetches the user's current location every 10 seconds using location services.
+
+
+3. Polyline Tracking:
+
+A polyline is drawn on the map, connecting the user's previous and current locations.
+The polyline updates in real-time as the user's location changes.
+
+
+4. Marker Information Window:
+
+Users can tap the location marker to open an info window.
+The info window displays the title "My current location" and the user's latitude and longitude as the snippet.
