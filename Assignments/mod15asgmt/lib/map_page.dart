@@ -52,8 +52,6 @@ class _MapPageState extends State<MapPage> {
     } catch (e) {
       if (mounted) {
         CustomDialogBox.show(context, () {
-          CustomSnackbar.show(context, 'Navigating to current location');
-
           initialCurrentLocation();
           Navigator.pop(context);
         });
