@@ -40,9 +40,7 @@ Projects in this folder:
 07. Assignment [Project 07 Module 13](https://github.com/muj-i/progress_pal):
 
 ![Alt Text](Assignments/AssignmentsSS/progress_pal/ss1.png)
-
 ![Alt Text](Assignments/AssignmentsSS/progress_pal/ss2.png)
-
 ![Alt Text](Assignments/AssignmentsSS/progress_pal/ss3.png)
 
 08. Assignment [Project 08 Module 14](https://github.com/muj-i/Flutter-Practice/tree/main/Assignments/mod14asgmt):
@@ -56,7 +54,6 @@ Projects in this folder:
 10. Assignment [Project 10 Module 16](https://github.com/muj-i/crafty_bay):
 
 ![Alt Text](Assignments/AssignmentsSS/crafty_bay/ss1.png)
-
 ![Alt Text](Assignments/AssignmentsSS/crafty_bay/ss2.png)
 
 ### Live Test
