@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/muj/Programming/Flutter-Practice/Assignments/mod15asgmt/linux"
+    "cmake.sourceDirectory": "/Users/muj/Programming/Flutter-Practice/Assignments/mod15asgmt/linux",
+    "dart.flutterSdkPath": "~/fvm/versions/3.13.9"
 }
